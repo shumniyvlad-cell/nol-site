@@ -65,8 +65,14 @@ test("desktop portal uses the live WebGL layer", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
 
-  await expect(page.locator("#hero canvas")).toHaveCount(1);
-  await expect(page.locator("#hero canvas")).toBeVisible();
+  const canvas = page.locator("#hero canvas");
+  await expect(canvas).toHaveCount(1);
+  await expect(canvas).toBeVisible();
+
+  const firstFrame = await canvas.screenshot();
+  await page.waitForTimeout(800);
+  const secondFrame = await canvas.screenshot();
+  expect(firstFrame.equals(secondFrame)).toBe(false);
 });
 
 test("mobile layout has no horizontal overflow", async ({ page }, testInfo) => {
