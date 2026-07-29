@@ -17,6 +17,11 @@ export function ZeroPortalStage() {
   const [canRenderWebGl, setCanRenderWebGl] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
+  const [assembleOnLoad] = useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.dataset.heroIntro === "first",
+  );
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -61,10 +66,12 @@ export function ZeroPortalStage() {
         <div className={`${styles.canvas} ${isReady ? styles.canvasReady : ""}`}>
           <ZeroPortalScene
             active={isVisible}
+            assembleOnLoad={assembleOnLoad}
             onReady={() => setIsReady(true)}
           />
         </div>
       ) : null}
+      <div className={styles.volumetricLight} />
       <div className={styles.edgeFade} />
     </div>
   );

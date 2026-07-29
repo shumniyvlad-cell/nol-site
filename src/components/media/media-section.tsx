@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ArrowIcon } from "@/components/icons/arrow-icon";
+import { LastPaymentBackground } from "@/components/media/last-payment-background";
 import { trackEvent } from "@/lib/analytics/client";
 import {
   premiereLeadSchema,
@@ -44,15 +45,17 @@ export function MediaSection() {
       id="media"
     >
       <div className={styles.poster}>
-        <div aria-hidden="true" className={styles.scene} />
+        <LastPaymentBackground />
         <div aria-hidden="true" className={styles.projectorWash} />
 
         <p className={styles.format}>БРЕНД-МЕДИА / ДОКУМЕНТАЛЬНЫЙ СЕРИАЛ</p>
 
-        <h2 className={styles.projectedTitle} id="media-title">
-          <span>ПОСЛЕДНИЙ</span>
-          <span>ПЛАТЁЖ</span>
-        </h2>
+        <div className={styles.titleCoordinateFrame}>
+          <h2 className={styles.projectedTitle} id="media-title">
+            <span>ПОСЛЕДНИЙ</span>
+            <span>ПЛАТЁЖ</span>
+          </h2>
+        </div>
 
         <div aria-hidden="true" className={styles.chairOcclusion} />
 

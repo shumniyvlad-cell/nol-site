@@ -15,48 +15,72 @@ export function SiteHeader() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    let animationFrame = 0;
+    const desktopThemedSections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-header-theme]"),
+    );
+    const compactThemedSections = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "[data-header-theme], [data-header-theme-mobile]",
+      ),
+    );
+
     const updateHeader = () => {
-      setIsScrolled(window.scrollY > 48);
+      animationFrame = 0;
+      const nextIsScrolled = window.scrollY > 48;
+      setIsScrolled((current) =>
+        current === nextIsScrolled ? current : nextIsScrolled,
+      );
 
       const headerProbe = 36;
       const isCompactViewport = window.innerWidth < 900;
-      const themedSections = Array.from(
-        document.querySelectorAll<HTMLElement>(
-          isCompactViewport
-            ? "[data-header-theme], [data-header-theme-mobile]"
-            : "[data-header-theme]",
-        ),
-      );
-      const activeSection = themedSections
-        .filter((section) => {
-          const rect = section.getBoundingClientRect();
-          return rect.top <= headerProbe && rect.bottom > headerProbe;
-        })
-        .at(-1);
+      const themedSections = isCompactViewport
+        ? compactThemedSections
+        : desktopThemedSections;
+      let activeSection: HTMLElement | undefined;
+
+      for (const section of themedSections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= headerProbe && rect.bottom > headerProbe) {
+          activeSection = section;
+        }
+      }
 
       const nextTheme =
         (isCompactViewport
           ? activeSection?.dataset.headerThemeMobile
           : undefined) ?? activeSection?.dataset.headerTheme;
-      setTheme(
-        nextTheme === "light" || nextTheme === "split" ? nextTheme : "dark",
+      const resolvedTheme =
+        nextTheme === "light" || nextTheme === "split" ? nextTheme : "dark";
+      setTheme((current) =>
+        current === resolvedTheme ? current : resolvedTheme,
       );
     };
+
+    const requestHeaderUpdate = () => {
+      if (animationFrame === 0) {
+        animationFrame = window.requestAnimationFrame(updateHeader);
+      }
+    };
+
     updateHeader();
-    const animationFrame = window.requestAnimationFrame(() => {
+    const hydrationFrame = window.requestAnimationFrame(() => {
       setIsHydrated(true);
       updateHeader();
     });
-    const hashScrollTimer = window.setTimeout(updateHeader, 160);
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    window.addEventListener("resize", updateHeader);
-    window.addEventListener("hashchange", updateHeader);
+    const hashScrollTimer = window.setTimeout(requestHeaderUpdate, 160);
+    window.addEventListener("scroll", requestHeaderUpdate, { passive: true });
+    window.addEventListener("resize", requestHeaderUpdate);
+    window.addEventListener("hashchange", requestHeaderUpdate);
     return () => {
-      window.cancelAnimationFrame(animationFrame);
+      if (animationFrame !== 0) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+      window.cancelAnimationFrame(hydrationFrame);
       window.clearTimeout(hashScrollTimer);
-      window.removeEventListener("scroll", updateHeader);
-      window.removeEventListener("resize", updateHeader);
-      window.removeEventListener("hashchange", updateHeader);
+      window.removeEventListener("scroll", requestHeaderUpdate);
+      window.removeEventListener("resize", requestHeaderUpdate);
+      window.removeEventListener("hashchange", requestHeaderUpdate);
     };
   }, []);
 

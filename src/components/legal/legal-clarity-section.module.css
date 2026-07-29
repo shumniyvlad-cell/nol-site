@@ -34,7 +34,7 @@
 }
 
 .questionIndex {
-  padding: 112px 24px 44px var(--page-gutter);
+  padding: 122px 24px 52px var(--page-gutter);
   border-right: 1px solid rgba(10, 10, 10, 0.18);
 }
 
@@ -55,7 +55,7 @@
 .questionIndex ol {
   display: grid;
   gap: 0;
-  margin: 42px 0 0;
+  margin: 48px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -73,7 +73,7 @@
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
   width: 100%;
-  min-height: 72px;
+  min-height: 66px;
   align-content: center;
   gap: 2px 8px;
   padding: 10px 0;
@@ -100,9 +100,9 @@
 
 .shortQuestion {
   grid-column: 2;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.34;
+  line-height: 1.38;
 }
 
 .signal {
@@ -126,16 +126,16 @@
 }
 
 .questionField {
-  padding: 116px clamp(36px, 4vw, 72px) 80px;
+  padding: 128px clamp(42px, 4.4vw, 78px) 92px;
 }
 
 .questionField h2 {
-  max-width: 780px;
-  margin: clamp(54px, 8.5vh, 92px) 0 0;
-  font-size: clamp(68px, 6.6vw, 104px);
-  font-weight: 570;
-  letter-spacing: -0.065em;
-  line-height: 0.98;
+  max-width: 800px;
+  margin: clamp(72px, 10vh, 108px) 0 0;
+  font-size: clamp(64px, 6.1vw, 94px);
+  font-weight: 525;
+  letter-spacing: -0.06em;
+  line-height: 1.01;
   text-wrap: balance;
 }
 
@@ -152,6 +152,7 @@
 
 .answer {
   position: relative;
+  animation: answer-in 320ms var(--ease-out) both;
 }
 
 .answer::before {
@@ -183,9 +184,23 @@
 .answerText {
   max-width: 284px;
   margin: 24px 0 0;
-  font-size: clamp(19px, 1.42vw, 22px);
+  font-size: clamp(18px, 1.32vw, 21px);
   font-weight: 450;
   line-height: 1.43;
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
 }
 
 .disclaimer {
@@ -229,7 +244,7 @@
   }
 
   .questionField h2 {
-    font-size: clamp(58px, 6.4vw, 76px);
+    font-size: clamp(56px, 6.1vw, 72px);
   }
 
   .answerMargin {
@@ -240,24 +255,24 @@
 
 @media (max-width: 899px) {
   .legal {
-    min-height: 1180px;
-    overflow: clip;
+    min-height: 1040px;
+    overflow: hidden;
     background: var(--surface-light);
   }
 
   .paperNoise {
-    inset: 0 0 340px;
+    inset: 0 0 320px;
   }
 
   .frame {
     display: flex;
-    min-height: 1180px;
+    min-height: 1040px;
     flex-direction: column;
   }
 
   .questionIndex {
     order: 1;
-    padding: 100px 32px 22px;
+    padding: 96px 32px 18px;
     border-right: 0;
     border-bottom: 1px solid rgba(10, 10, 10, 0.18);
   }
@@ -265,7 +280,9 @@
   .questionIndex ol {
     display: flex;
     overflow-x: auto;
-    margin-top: 24px;
+    margin-top: 22px;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 24px;
     scrollbar-width: thin;
     scroll-snap-type: x proximity;
   }
@@ -281,7 +298,7 @@
   }
 
   .questionIndex button {
-    min-height: 86px;
+    min-height: 78px;
     padding-right: 20px;
   }
 
@@ -293,20 +310,21 @@
 
   .questionField {
     order: 2;
-    min-height: 500px;
-    padding: 56px 32px 80px;
+    min-height: 430px;
+    padding: 58px 32px 72px;
   }
 
   .questionField h2 {
     max-width: 720px;
-    margin-top: 54px;
-    font-size: clamp(54px, 8.6vw, 70px);
+    margin-top: 58px;
+    font-size: clamp(50px, 8vw, 64px);
+    line-height: 1.02;
   }
 
   .answerMargin {
     order: 3;
-    min-height: 340px;
-    padding: 64px 32px 40px;
+    min-height: 320px;
+    padding: 58px 32px 38px;
   }
 
   .answer::before,
@@ -318,38 +336,28 @@
 @media (max-width: 599px) {
   .legal,
   .frame {
-    min-height: 1300px;
+    min-height: 1030px;
   }
 
   .questionIndex {
-    padding: 92px 20px 24px;
+    padding: 88px 20px 16px;
   }
 
   .questionIndex ol {
-    display: grid;
-    overflow: visible;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 22px;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 20px;
   }
 
   .questionIndex li {
-    min-width: 0;
+    flex: 0 0 148px;
     border-top: 1px solid rgba(10, 10, 10, 0.1);
-  }
-
-  .questionIndex li:nth-child(odd) {
-    padding-right: 14px;
-    border-right: 1px solid rgba(10, 10, 10, 0.1);
-  }
-
-  .questionIndex li:nth-child(even) {
-    padding-left: 14px;
   }
 
   .questionIndex button {
     grid-template-columns: 20px minmax(0, 1fr);
-    min-height: 80px;
-    padding-right: 0;
+    min-height: 72px;
+    padding-right: 16px;
   }
 
   .questionNumber,
@@ -362,8 +370,8 @@
   }
 
   .questionField {
-    min-height: 430px;
-    padding: 48px 20px 64px;
+    min-height: 390px;
+    padding: 48px 20px 58px;
   }
 
   .questionField > p {
@@ -371,14 +379,14 @@
   }
 
   .questionField h2 {
-    margin-top: 48px;
-    font-size: clamp(44px, 13.2vw, 56px);
-    line-height: 0.98;
+    margin-top: 52px;
+    font-size: clamp(40px, 11.8vw, 48px);
+    line-height: 1.02;
   }
 
   .answerMargin {
-    min-height: 370px;
-    padding: 58px 20px 38px;
+    min-height: 330px;
+    padding: 54px 20px max(34px, env(safe-area-inset-bottom));
   }
 
   .answerText {
@@ -389,5 +397,11 @@
   .disclaimer {
     max-width: 330px;
     font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer {
+    animation: none;
   }
 }

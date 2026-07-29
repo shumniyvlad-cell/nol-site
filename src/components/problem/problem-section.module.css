@@ -36,6 +36,8 @@
   min-height: max(900px, 100svh);
   margin: 0 auto;
   padding-inline: var(--page-gutter);
+  perspective: 1600px;
+  perspective-origin: 78% 46%;
 }
 
 .projection {
@@ -45,10 +47,61 @@
   width: min(42%, 620px);
   color: rgba(173, 192, 202, 0.68);
   font-family: var(--font-plex-mono), monospace;
+  filter: blur(0.24px) contrast(0.92);
+  mix-blend-mode: screen;
+  transform: rotateY(-6.5deg) rotateX(0.6deg) skewY(-0.55deg);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  -webkit-mask-image:
+    radial-gradient(ellipse 105% 95% at 46% 45%, #000 42%, rgba(0, 0, 0, 0.7) 74%, transparent 112%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 20% 88%, rgba(0, 0, 0, 0.62));
+  mask-image:
+    radial-gradient(ellipse 105% 95% at 46% 45%, #000 42%, rgba(0, 0, 0, 0.7) 74%, transparent 112%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 20% 88%, rgba(0, 0, 0, 0.62));
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
   text-shadow:
-    0 0 8px rgba(155, 187, 202, 0.12),
-    0 0 30px rgba(155, 187, 202, 0.08);
+    0 0 1px rgba(223, 236, 241, 0.7),
+    0 0 8px rgba(155, 187, 202, 0.16),
+    0 0 34px rgba(155, 187, 202, 0.1);
   animation: projector-in 1100ms 120ms var(--ease-standard) both;
+}
+
+.projection::before,
+.projection::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+.projection::before {
+  inset: -9% -8% -10% -6%;
+  opacity: 0.24;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      rgba(210, 229, 237, 0.08) 4px,
+      transparent 5px
+    ),
+    radial-gradient(
+      ellipse at 46% 43%,
+      rgba(175, 204, 216, 0.11),
+      transparent 72%
+    );
+  mix-blend-mode: screen;
+}
+
+.projection::after {
+  inset: -18% -14% -16% -10%;
+  opacity: 0.2;
+  background: radial-gradient(
+    ellipse at 43% 46%,
+    rgba(170, 201, 214, 0.15),
+    transparent 68%
+  );
+  filter: blur(18px);
 }
 
 .title {
@@ -107,7 +160,8 @@
   from {
     opacity: 0;
     filter: blur(8px);
-    transform: translateY(8px);
+    transform: translateY(8px) rotateY(-6.5deg) rotateX(0.6deg)
+      skewY(-0.55deg);
   }
 
   45% {
@@ -116,8 +170,9 @@
 
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
+    filter: blur(0.24px) contrast(0.92);
+    transform: translateY(0) rotateY(-6.5deg) rotateX(0.6deg)
+      skewY(-0.55deg);
   }
 }
 
@@ -170,6 +225,16 @@
     left: var(--page-gutter);
     width: auto;
     color: rgba(223, 230, 232, 0.82);
+    filter: none;
+    mix-blend-mode: normal;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .projection::before,
+  .projection::after {
+    display: none;
   }
 
   .title {

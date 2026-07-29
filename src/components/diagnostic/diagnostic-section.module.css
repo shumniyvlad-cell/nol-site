@@ -1,7 +1,7 @@
 .diagnostic {
   position: relative;
   min-height: max(900px, 100svh);
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
   background: var(--surface-light);
   color: #0a0a0a;
@@ -22,18 +22,18 @@
 
 .frame {
   position: relative;
+  z-index: 1;
   width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
   min-height: max(900px, 100svh);
   margin: 0 auto;
-  padding-inline: var(--page-gutter);
+  padding: 0 var(--page-gutter) 24px;
 }
 
 .identity {
   position: absolute;
   top: 98px;
   left: var(--page-gutter);
-  z-index: 2;
-  display: grid;
+  z-index: 3;
 }
 
 .stepMeta {
@@ -47,8 +47,8 @@
   position: absolute;
   top: clamp(152px, 15.5vh, 170px);
   left: -28px;
-  z-index: -1;
-  color: rgba(10, 10, 10, 0.11);
+  z-index: 0;
+  color: rgba(10, 10, 10, 0.105);
   font-size: clamp(430px, 42vw, 650px);
   font-weight: 500;
   letter-spacing: -0.11em;
@@ -61,6 +61,7 @@
   position: absolute;
   top: 36px;
   right: 0;
+  z-index: 4;
   display: grid;
   gap: 38px;
   margin: 0;
@@ -69,36 +70,40 @@
 }
 
 .stepDots li {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: rgba(10, 10, 10, 0.34);
 }
 
 .stepDots .activeStep {
-  background: #0a0a0a;
-  box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.08);
+  background: var(--accent-red);
+  box-shadow: 0 0 0 4px rgba(227, 34, 25, 0.08);
 }
 
 .form {
-  position: absolute;
-  inset: 0 var(--page-gutter) 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: max(900px, 100svh);
+  flex-direction: column;
+  padding-top: clamp(326px, 39vh, 356px);
 }
 
 .form fieldset {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
+  column-gap: 24px;
 }
 
 .question {
-  position: absolute;
-  top: clamp(340px, 36vh, 374px);
-  left: 24%;
-  width: min(70%, 940px);
+  grid-column: 4 / span 8;
+  max-width: 920px;
   margin: 0;
-  padding: 0;
   font-size: clamp(50px, 4.2vw, 64px);
   font-weight: 520;
   letter-spacing: -0.055em;
@@ -107,15 +112,13 @@
 }
 
 .options {
-  position: absolute;
-  top: clamp(505px, 51.5vh, 540px);
-  right: 0;
-  width: min(59%, 900px);
+  grid-column: 6 / -1;
+  margin-top: 28px;
   border-top: 1px solid rgba(10, 10, 10, 0.6);
 }
 
 .option {
-  min-height: 88px;
+  min-height: 74px;
   border-bottom: 1px solid rgba(10, 10, 10, 0.5);
 }
 
@@ -129,13 +132,13 @@
 
 .option label {
   display: flex;
+  min-height: 74px;
   align-items: center;
-  min-height: 88px;
-  padding: 12px 24px;
+  padding: 14px 24px;
   cursor: pointer;
-  font-size: clamp(19px, 1.48vw, 23px);
+  font-size: clamp(18px, 1.42vw, 22px);
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.28;
   transition: color 160ms ease;
 }
 
@@ -155,9 +158,6 @@
   margin-right: 0;
   border-radius: 50%;
   background: var(--accent-red);
-  box-shadow:
-    0 0 0 8px rgba(255, 255, 255, 0.72),
-    0 0 0 10px rgba(10, 10, 10, 0.05);
   transition:
     width 180ms var(--ease-out),
     height 180ms var(--ease-out),
@@ -165,35 +165,34 @@
 }
 
 .option input:checked + label .optionDot {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-right: 28px;
+  box-shadow:
+    0 0 0 7px rgba(255, 255, 255, 0.72),
+    0 0 0 9px rgba(10, 10, 10, 0.05);
 }
 
 .privacy {
-  position: absolute;
-  right: 0;
-  bottom: 78px;
-  margin: 0;
+  align-self: flex-end;
+  margin: 16px 0 0;
   color: rgba(10, 10, 10, 0.42);
   font-family: var(--font-plex-mono), monospace;
   font-size: 10px;
+  line-height: 1.45;
 }
 
 .actions {
-  position: absolute;
-  right: 0;
-  bottom: 24px;
-  left: 0;
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 .actions button,
 .resultBack {
   display: inline-flex;
-  align-items: center;
   min-height: 48px;
+  align-items: center;
   gap: 14px;
   padding: 0 0 4px;
   border: 0;
@@ -234,10 +233,11 @@
 }
 
 .result {
-  position: absolute;
-  top: clamp(130px, 15vh, 150px);
-  right: var(--page-gutter);
-  width: min(68%, 940px);
+  position: relative;
+  z-index: 2;
+  width: min(72%, 940px);
+  margin-left: 24%;
+  padding: clamp(150px, 17vh, 176px) 0 72px;
 }
 
 .result h2 {
@@ -247,6 +247,7 @@
   font-weight: 520;
   letter-spacing: -0.055em;
   line-height: 1.04;
+  text-wrap: balance;
 }
 
 .result p {
@@ -258,8 +259,8 @@
 
 .resultLink {
   display: inline-flex;
-  align-items: center;
   min-height: 52px;
+  align-items: center;
   margin-top: 36px;
   gap: 32px;
   border-bottom: 1px solid currentColor;
@@ -280,19 +281,38 @@
 
 @media (max-width: 1199px) {
   .question {
-    left: 24%;
-    width: 72%;
-    font-size: clamp(48px, 5.2vw, 62px);
+    grid-column: 4 / -1;
+    font-size: clamp(46px, 5vw, 60px);
   }
 
   .options {
-    width: 68%;
+    grid-column: 5 / -1;
+  }
+}
+
+@media (min-width: 600px) and (max-height: 820px) {
+  .form {
+    padding-top: 274px;
+  }
+
+  .question {
+    font-size: clamp(44px, 5vw, 54px);
+  }
+
+  .options {
+    margin-top: 22px;
+  }
+
+  .option,
+  .option label {
+    min-height: 64px;
   }
 }
 
 @media (max-width: 899px) {
   .diagnostic,
-  .frame {
+  .frame,
+  .form {
     min-height: 960px;
   }
 
@@ -306,23 +326,29 @@
     font-size: clamp(360px, 62vw, 520px);
   }
 
+  .form {
+    padding-top: 330px;
+  }
+
   .question {
-    top: 350px;
-    left: 10%;
-    width: 84%;
+    grid-column: 2 / -1;
     font-size: clamp(44px, 6.8vw, 58px);
   }
 
   .options {
-    top: 500px;
-    width: 80%;
+    grid-column: 3 / -1;
   }
 }
 
 @media (max-width: 599px) {
   .diagnostic,
-  .frame {
+  .frame,
+  .form {
     min-height: max(844px, 100svh);
+  }
+
+  .frame {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
   }
 
   .identity {
@@ -346,61 +372,65 @@
     gap: 27px;
   }
 
+  .form {
+    padding-top: 330px;
+  }
+
+  .form fieldset {
+    display: block;
+  }
+
   .question {
-    top: 346px;
-    left: 0;
     width: 100%;
     font-size: clamp(38px, 11vw, 46px);
     line-height: 1.05;
   }
 
   .options {
-    top: 474px;
     width: 100%;
+    margin-top: 28px;
   }
 
-  .option {
-    min-height: 72px;
+  .option,
+  .option label {
+    min-height: 66px;
   }
 
   .option label {
-    min-height: 72px;
     padding: 10px 8px;
     font-size: 17px;
   }
 
   .option input:checked + label .optionDot {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
     margin-right: 22px;
   }
 
   .privacy {
-    right: auto;
-    bottom: 68px;
-    left: 0;
-    max-width: 250px;
+    align-self: flex-start;
+    max-width: 270px;
+    margin-top: 16px;
     font-size: 9px;
   }
 
   .actions {
-    bottom: 16px;
+    margin-top: 8px;
   }
 
   .actions button {
     min-height: 48px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .result {
-    top: 150px;
-    right: var(--page-gutter);
-    left: var(--page-gutter);
     width: auto;
+    margin-left: 0;
+    padding: 150px 0 64px;
   }
 
   .result h2 {
-    font-size: 42px;
+    font-size: clamp(38px, 10.8vw, 44px);
   }
 
   .result p {
@@ -410,6 +440,6 @@
 
   .complete,
   .complete .frame {
-    min-height: 1460px;
+    min-height: 1380px;
   }
 }

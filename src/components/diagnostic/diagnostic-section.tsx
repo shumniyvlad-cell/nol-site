@@ -49,8 +49,7 @@ export function DiagnosticSection({
     }));
   };
 
-  const showResult = () => {
-    setIsComplete(true);
+  const scrollDiagnosticToStart = () => {
     window.requestAnimationFrame(() => {
       document.getElementById("diagnostic")?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -61,13 +60,20 @@ export function DiagnosticSection({
     });
   };
 
+  const showResult = () => {
+    setIsComplete(true);
+    scrollDiagnosticToStart();
+  };
+
   const goBack = () => {
     if (isComplete) {
       setIsComplete(false);
       setIsCompletingMissingAnswers(true);
+      scrollDiagnosticToStart();
       return;
     }
     setStep((current) => Math.max(0, current - 1));
+    scrollDiagnosticToStart();
   };
 
   const goForward = () => {
@@ -93,9 +99,11 @@ export function DiagnosticSection({
 
       setIsCompletingMissingAnswers(true);
       setStep(firstUnansweredIndex);
+      scrollDiagnosticToStart();
       return;
     }
     setStep((current) => Math.min(questions.length - 1, current + 1));
+    scrollDiagnosticToStart();
   };
 
   return (
@@ -148,10 +156,11 @@ export function DiagnosticSection({
               goForward();
             }}
           >
-            <fieldset>
-              <legend className={styles.question} id="diagnostic-title">
+            <fieldset aria-labelledby="diagnostic-title">
+              <legend className="sr-only">{activeQuestion.question}</legend>
+              <h2 className={styles.question} id="diagnostic-title">
                 {activeQuestion.question}
-              </legend>
+              </h2>
 
               <div className={styles.options}>
                 {activeQuestion.options.map((option, optionIndex) => {

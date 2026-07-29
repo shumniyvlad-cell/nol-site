@@ -69,9 +69,18 @@ test("desktop portal uses the live WebGL layer", async ({ page }, testInfo) => {
   await expect(canvas).toHaveCount(1);
   await expect(canvas).toBeVisible();
 
-  const firstFrame = await canvas.screenshot();
+  const heroBox = await page.locator("#hero").boundingBox();
+  expect(heroBox).not.toBeNull();
+  const clip = {
+    x: 0,
+    y: 0,
+    width: Math.min(heroBox!.width, 1440),
+    height: Math.min(heroBox!.height, 900),
+  };
+  const firstFrame = await page.screenshot({ clip });
+  await page.mouse.move(1180, 360);
   await page.waitForTimeout(800);
-  const secondFrame = await canvas.screenshot();
+  const secondFrame = await page.screenshot({ clip });
   expect(firstFrame.equals(secondFrame)).toBe(false);
 });
 

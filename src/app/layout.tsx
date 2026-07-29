@@ -17,6 +17,21 @@ const plexMono = IBM_Plex_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+const heroIntroStateScript = `
+  (() => {
+    const key = "nol:hero-intro:v2";
+    try {
+      const hasPlayed = window.localStorage.getItem(key) === "played";
+      document.documentElement.dataset.heroIntro = hasPlayed ? "seen" : "first";
+      if (!hasPlayed) {
+        window.localStorage.setItem(key, "played");
+      }
+    } catch {
+      document.documentElement.dataset.heroIntro = "first";
+    }
+  })();
+`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -55,7 +70,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "dark",
+  interactiveWidget: "resizes-content",
   themeColor: "#050505",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -65,6 +82,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={`${manrope.variable} ${plexMono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: heroIntroStateScript }} />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           Перейти к содержанию

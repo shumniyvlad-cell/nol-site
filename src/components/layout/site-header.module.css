@@ -317,6 +317,10 @@
 }
 
 @media (max-width: 899px) {
+  .header {
+    height: calc(var(--header-height) + env(safe-area-inset-top));
+  }
+
   .split:not(.menuActive) {
     border-bottom-color: var(--border-light);
     background: rgba(239, 239, 237, 0.9);
@@ -329,6 +333,7 @@
 
   .inner {
     grid-template-columns: 1fr auto;
+    padding-top: env(safe-area-inset-top);
   }
 
   .navigation,
@@ -343,5 +348,12 @@
   .menuButton {
     display: block;
     justify-self: end;
+  }
+
+  .mobileMenu {
+    padding-top: calc(
+      var(--header-height) + env(safe-area-inset-top) + 48px
+    );
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
   }
 }

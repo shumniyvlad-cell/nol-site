@@ -25,11 +25,10 @@
   max-width: 980px;
   margin: 0;
   font-size: clamp(72px, 5.9vw, 92px);
-  font-weight: 550;
+  font-weight: 400;
   letter-spacing: -0.052em;
   line-height: 0.96;
-  opacity: 0;
-  animation: title-in 720ms 620ms var(--ease-out) forwards;
+  opacity: 1;
 }
 
 .mobileTitleText {
@@ -40,8 +39,6 @@
   grid-column: 1 / span 5;
   align-self: end;
   margin-top: clamp(116px, 14vh, 140px);
-  opacity: 0;
-  animation: details-in 620ms 980ms var(--ease-out) forwards;
 }
 
 .summary {
@@ -181,35 +178,98 @@
   height: 1px;
   background: rgba(247, 247, 245, 0.42);
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.24);
-  transform: scaleX(0);
+  transform: scaleX(1);
   transform-origin: center;
-  animation: horizon-in 620ms 120ms var(--ease-standard) forwards;
+}
+
+:global(html[data-hero-intro="first"]) .horizon {
+  animation: horizon-in 680ms 120ms var(--ease-standard) both;
+}
+
+:global(html[data-hero-intro="first"]) .title {
+  animation: title-in 660ms 920ms var(--ease-out) both;
+}
+
+:global(html[data-hero-intro="first"]) .summary {
+  animation: detail-line-in 480ms 1160ms var(--ease-out) both;
+}
+
+:global(html[data-hero-intro="first"]) .actions {
+  animation: action-line-in 480ms 1340ms var(--ease-out) both;
+}
+
+:global(html[data-hero-intro="first"]) .note {
+  animation: detail-line-in 420ms 1490ms var(--ease-out) both;
+}
+
+:global(html[data-hero-intro="first"]) .nextCue {
+  animation: cue-in 420ms 1570ms var(--ease-out) both;
 }
 
 @keyframes horizon-in {
+  from {
+    opacity: 0.08;
+    transform: scaleX(0.02);
+    filter: blur(4px);
+  }
+
   to {
+    opacity: 1;
     transform: scaleX(1);
+    filter: blur(0);
   }
 }
 
 @keyframes title-in {
   from {
     opacity: 0;
-    transform: translateY(22px);
-    filter: blur(7px);
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(16px) scaleX(0.985);
+    transform-origin: left;
+    filter: blur(4px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0) scaleX(1);
+    transform-origin: left;
     filter: blur(0);
   }
 }
 
-@keyframes details-in {
+@keyframes detail-line-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes action-line-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes cue-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
 
   to {

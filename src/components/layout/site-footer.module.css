@@ -113,7 +113,7 @@
     min-height: 186px;
     align-content: end;
     gap: 4px;
-    padding: 24px 20px 18px;
+    padding: 24px 20px max(18px, env(safe-area-inset-bottom));
     font-size: 11px;
   }
 

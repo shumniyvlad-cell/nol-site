@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   legalContentReviewRequired,
   legalDisclaimer,
@@ -12,7 +12,30 @@ const initialQuestionIndex = 3;
 
 export function LegalClaritySection() {
   const [activeIndex, setActiveIndex] = useState(initialQuestionIndex);
+  const indexListRef = useRef<HTMLOListElement>(null);
+  const questionButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeQuestion = legalQuestions[activeIndex];
+
+  useEffect(() => {
+    if (window.innerWidth >= 900) {
+      return;
+    }
+
+    const list = indexListRef.current;
+    const activeButton = questionButtonRefs.current[activeIndex];
+    if (!list || !activeButton) {
+      return;
+    }
+
+    const targetLeft =
+      activeButton.offsetLeft - list.offsetLeft - list.clientWidth * 0.12;
+    list.scrollTo({
+      left: Math.max(targetLeft, 0),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, [activeIndex]);
 
   return (
     <section
@@ -26,7 +49,7 @@ export function LegalClaritySection() {
       <div className={styles.frame}>
         <aside className={styles.questionIndex}>
           <p className={styles.indexLabel}>ВОПРОСЫ</p>
-          <ol aria-label="Юридические вопросы">
+          <ol aria-label="Юридические вопросы" ref={indexListRef}>
             {legalQuestions.map((item, index) => (
               <li
                 className={index === activeIndex ? styles.activeItem : ""}
@@ -35,6 +58,9 @@ export function LegalClaritySection() {
                 <button
                   aria-current={index === activeIndex ? "true" : undefined}
                   onClick={() => setActiveIndex(index)}
+                  ref={(node) => {
+                    questionButtonRefs.current[index] = node;
+                  }}
                   type="button"
                 >
                   <span className={styles.signal} />
@@ -61,7 +87,7 @@ export function LegalClaritySection() {
           data-header-theme-mobile="dark"
           data-legal-review-required={legalContentReviewRequired}
         >
-          <div className={styles.answer}>
+          <div className={styles.answer} key={activeQuestion.id}>
             <p className={styles.answerLabel}>КОРОТКИЙ ОТВЕТ</p>
             <p className={styles.answerText}>{activeQuestion.answer}</p>
           </div>

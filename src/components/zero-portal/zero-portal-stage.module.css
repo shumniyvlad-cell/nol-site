@@ -37,16 +37,40 @@
 }
 
 .fallbackHidden {
-  opacity: 1;
+  opacity: 0.78;
 }
 
 .canvas {
   opacity: 0;
   mix-blend-mode: screen;
+  pointer-events: auto;
 }
 
 .canvasReady {
-  opacity: 0.22;
+  opacity: 0.42;
+}
+
+.volumetricLight {
+  position: absolute;
+  inset: 9% -8% -2% 42%;
+  opacity: 0.34;
+  background:
+    radial-gradient(
+      ellipse 20% 54% at 58% 48%,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.035) 34%,
+      transparent 70%
+    ),
+    conic-gradient(
+      from 253deg at 57% 58%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.035) 22deg,
+      transparent 54deg
+    );
+  filter: blur(18px);
+  transform: scale(1.02);
+  transform-origin: 58% 58%;
+  animation: volume-breathe 8s ease-in-out infinite alternate;
 }
 
 .edgeFade {
@@ -67,6 +91,58 @@
       rgba(5, 5, 5, 0) 84%,
       rgba(5, 5, 5, 0.48) 100%
     );
+}
+
+:global(html[data-hero-intro="first"]) .fallback {
+  animation: space-birth 1400ms var(--ease-standard) both;
+}
+
+:global(html[data-hero-intro="first"]) .volumetricLight {
+  animation:
+    light-birth 1250ms 180ms var(--ease-standard) both,
+    volume-breathe 8s 1450ms ease-in-out infinite alternate;
+}
+
+@keyframes space-birth {
+  0% {
+    opacity: 0.035;
+    filter: brightness(0.22) contrast(1.08);
+    transform: scale(1.025);
+  }
+
+  44% {
+    opacity: 0.22;
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes light-birth {
+  from {
+    opacity: 0;
+    transform: scale(0.72, 0.2);
+  }
+
+  to {
+    opacity: 0.34;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes volume-breathe {
+  from {
+    opacity: 0.26;
+    transform: scale(0.99, 0.985);
+  }
+
+  to {
+    opacity: 0.37;
+    transform: scale(1.025, 1.018);
+  }
 }
 
 @media (max-width: 899px) {
@@ -90,5 +166,16 @@
       rgba(5, 5, 5, 0.72) 67%,
       var(--black) 92%
     );
+  }
+
+  .volumetricLight {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback,
+  .volumetricLight {
+    animation: none;
   }
 }

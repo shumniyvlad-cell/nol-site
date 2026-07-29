@@ -16,32 +16,76 @@
   isolation: isolate;
 }
 
-.scene,
+.videoStage,
 .projectorWash,
 .chairOcclusion {
   position: absolute;
   inset: 0;
 }
 
-.scene,
-.chairOcclusion {
-  background-image: image-set(
-    url("/media/media-studio.avif") type("image/avif"),
-    url("/media/media-studio.webp") type("image/webp")
-  );
-  background-position: center;
-  background-size: cover;
+.videoStage {
+  z-index: -3;
+  overflow: hidden;
+  background: #050505;
 }
 
-.scene {
-  z-index: -3;
+.videoPoster,
+.videoPoster img,
+.backgroundVideo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.videoPoster img,
+.backgroundVideo {
+  object-fit: cover;
+  object-position: 20% 50%;
+}
+
+.backgroundVideo {
+  z-index: 1;
+  opacity: 0;
+  background: #050505;
+  transition: opacity 160ms ease;
+}
+
+.backgroundVideoReady {
+  opacity: 1;
+}
+
+.chairOcclusion {
+  background-image: url("/media/last-payment-poster.webp");
+  background-position: center;
+  background-size: cover;
 }
 
 .projectorWash {
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 42%, rgba(0, 0, 0, 0.08)),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 38%, rgba(0, 0, 0, 0.3));
+    linear-gradient(
+      270deg,
+      #050505 0%,
+      rgba(5, 5, 5, 0.86) 4%,
+      rgba(5, 5, 5, 0.2) 9%,
+      transparent 13%
+    ),
+    radial-gradient(
+      ellipse 48% 58% at 12% 50%,
+      rgba(0, 0, 0, 0.82),
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      #050505 0%,
+      #050505 27%,
+      rgba(5, 5, 5, 0.98) 33%,
+      rgba(5, 5, 5, 0.76) 39%,
+      rgba(5, 5, 5, 0.2) 47%,
+      transparent 54%
+    );
 }
 
 .format {
@@ -56,49 +100,71 @@
   letter-spacing: 0.16em;
 }
 
+.titleCoordinateFrame {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20%;
+  z-index: 0;
+  aspect-ratio: 16 / 9;
+  min-width: 100%;
+  transform: translateX(-20%);
+  container-type: size;
+  pointer-events: none;
+}
+
 .projectedTitle {
   position: absolute;
-  top: 26.5%;
-  left: 27.6%;
-  z-index: 0;
+  top: 26.2%;
+  left: 27%;
   display: grid;
+  width: 62%;
   margin: 0;
-  color: rgba(247, 247, 245, 0.2);
-  font-size: clamp(104px, 9.7vw, 154px);
-  font-weight: 650;
-  letter-spacing: -0.075em;
-  line-height: 0.83;
-  text-shadow: 0 0 22px rgba(247, 247, 245, 0.08);
+  color: rgba(247, 247, 245, 0.34);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: clamp(150px, 20.9cqh, 188px);
+  font-weight: 600;
+  letter-spacing: -0.095em;
+  line-height: 1.22;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.82),
+    0 0 12px rgba(0, 0, 0, 0.58),
+    0 0 24px rgba(247, 247, 245, 0.08);
+  mix-blend-mode: screen;
+}
+
+.projectedTitle span {
+  width: max-content;
+  transform: scaleX(0.97);
+  transform-origin: left center;
+}
+
+.projectedTitle span:last-child {
+  transform: scaleX(1.42);
 }
 
 .chairOcclusion {
-  z-index: 1;
-  clip-path: polygon(42% 51%, 59% 51%, 63% 90%, 37% 90%);
+  display: none;
 }
 
 .statement {
   position: absolute;
-  top: 38%;
+  top: 40.5%;
   left: var(--page-gutter);
   z-index: 3;
-  width: min(32vw, 440px);
+  width: min(27vw, 330px);
 }
 
 .statement h3 {
-  max-width: 390px;
-  margin: 0;
-  font-size: clamp(27px, 2.1vw, 34px);
-  font-weight: 520;
-  letter-spacing: -0.035em;
-  line-height: 1.15;
+  display: none;
 }
 
 .statement p {
-  max-width: 390px;
-  margin: 24px 0 0;
+  max-width: 320px;
+  margin: 0;
   color: rgba(247, 247, 245, 0.82);
-  font-size: clamp(19px, 1.65vw, 25px);
-  line-height: 1.42;
+  font-size: clamp(21px, 1.72vw, 26px);
+  line-height: 1.38;
 }
 
 .actions {
@@ -460,14 +526,35 @@
   color: var(--white);
 }
 
+@media (max-width: 1399px) {
+  .videoPoster img,
+  .backgroundVideo {
+    object-position: 42% 50%;
+  }
+
+  .titleCoordinateFrame {
+    left: 42%;
+    transform: translateX(-42%);
+  }
+}
+
 @media (max-width: 1199px) {
   .media {
     grid-template-columns: minmax(0, 1fr) 224px;
   }
 
+  .videoPoster img,
+  .backgroundVideo {
+    object-position: 52% 50%;
+  }
+
+  .titleCoordinateFrame {
+    left: 52%;
+    transform: translateX(-52%);
+  }
+
   .projectedTitle {
-    left: 25%;
-    font-size: clamp(94px, 10vw, 120px);
+    font-size: clamp(142px, 20.6cqh, 185px);
   }
 
   .statement {
@@ -480,7 +567,7 @@
   }
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1099px) {
   .media {
     display: block;
     min-height: 1260px;
@@ -490,7 +577,17 @@
     min-height: 920px;
   }
 
-  .scene,
+  .videoPoster img,
+  .backgroundVideo,
+  .chairOcclusion {
+    object-position: 52% center;
+  }
+
+  .titleCoordinateFrame {
+    left: 52%;
+    transform: translateX(-52%);
+  }
+
   .chairOcclusion {
     background-position: 52% center;
   }
@@ -498,12 +595,6 @@
   .format {
     top: 120px;
     left: 32px;
-  }
-
-  .projectedTitle {
-    top: 31%;
-    left: 12%;
-    font-size: clamp(82px, 14vw, 112px);
   }
 
   .statement {
@@ -539,6 +630,32 @@
   }
 }
 
+@media (max-width: 768px) {
+  .titleCoordinateFrame {
+    right: 0;
+    left: 0;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: auto;
+    transform: none;
+    container-type: normal;
+  }
+
+  .projectedTitle {
+    top: 48%;
+    right: 24px;
+    left: 24px;
+    width: auto;
+    font-size: clamp(56px, 11vw, 84px);
+    line-height: 1;
+  }
+
+  .projectedTitle span,
+  .projectedTitle span:last-child {
+    transform: none;
+  }
+}
+
 @media (max-width: 599px) {
   .media {
     min-height: 1570px;
@@ -548,15 +665,29 @@
     min-height: 1040px;
   }
 
-  .scene,
+  .videoPoster img,
+  .backgroundVideo,
   .chairOcclusion {
-    background-position: 51% center;
+    object-position: 50% center;
+  }
+
+  .chairOcclusion {
+    background-position: 50% center;
   }
 
   .projectorWash {
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.16), transparent 42%, rgba(0, 0, 0, 0.38)),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 74%);
+      radial-gradient(
+        ellipse 88% 34% at 28% 22%,
+        rgba(0, 0, 0, 0.52),
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.08) 36%,
+        transparent 58%
+      );
   }
 
   .format {
@@ -574,21 +705,20 @@
   }
 
   .statement h3 {
-    max-width: 330px;
-    font-size: 27px;
+    display: none;
   }
 
   .statement p {
     max-width: 330px;
-    margin-top: 18px;
     font-size: 18px;
   }
 
   .projectedTitle {
-    top: 48.5%;
+    top: 48%;
+    right: 20px;
     left: 20px;
-    font-size: clamp(50px, 14vw, 56px);
-    line-height: 0.88;
+    font-size: clamp(49px, 13.5vw, 55px);
+    line-height: 1.05;
   }
 
   .chairOcclusion {
