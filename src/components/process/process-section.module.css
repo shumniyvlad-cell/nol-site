@@ -1,0 +1,436 @@
+.process {
+  position: relative;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: #101112;
+  color: var(--white);
+}
+
+.scene,
+.vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.scene {
+  z-index: -2;
+  background-image: image-set(
+    url("/media/process-thresholds.avif") type("image/avif"),
+    url("/media/process-thresholds.webp") type("image/webp")
+  );
+  background-position: center;
+  background-size: cover;
+}
+
+.vignette {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 42%, rgba(0, 0, 0, 0.26)),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 28%, rgba(0, 0, 0, 0.08));
+}
+
+.frame {
+  position: relative;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: max(900px, 100svh);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+.intro {
+  position: absolute;
+  top: 148px;
+  left: var(--page-gutter);
+}
+
+.intro > p {
+  margin: 0 0 26px;
+  color: rgba(247, 247, 245, 0.64);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.intro h2 {
+  margin: 0;
+  font-size: clamp(70px, 6.2vw, 96px);
+  font-weight: 550;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
+.activeStage {
+  position: absolute;
+  top: 36%;
+  left: 38.6%;
+  display: grid;
+  grid-template-columns: auto minmax(240px, 330px);
+  align-items: center;
+  color: #0a0a0a;
+}
+
+.activeNumber {
+  font-size: clamp(190px, 18vw, 276px);
+  font-weight: 500;
+  letter-spacing: -0.12em;
+  line-height: 0.74;
+}
+
+.activeCopy {
+  margin-left: 60px;
+  transform: translateY(58px);
+}
+
+.activeCopy h3 {
+  margin: 0;
+  font-size: clamp(36px, 3vw, 48px);
+  font-weight: 550;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.activeCopy p {
+  max-width: 310px;
+  margin: 20px 0 0;
+  font-size: clamp(15px, 1.1vw, 18px);
+  font-weight: 500;
+  line-height: 1.48;
+}
+
+.stageMap {
+  position: absolute;
+  inset: 0 var(--page-gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stageItem {
+  position: absolute;
+  bottom: 360px;
+  transform: translateX(-50%);
+}
+
+.stage1 {
+  left: 7.5%;
+}
+
+.stage2 {
+  left: 31%;
+}
+
+.stage3 {
+  left: 51.5%;
+}
+
+.stage4 {
+  left: 82%;
+}
+
+.stage5 {
+  left: 97%;
+}
+
+.stageItem button {
+  display: grid;
+  min-width: 148px;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(247, 247, 245, 0.58);
+  text-align: left;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.stageItem button:hover,
+.stageItem button:focus-visible,
+.currentStage button {
+  color: var(--white);
+}
+
+.stageItem button span {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 13px;
+}
+
+.stageItem button strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.currentStage {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.route {
+  --route-start: 31.8%;
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: 226px;
+  left: var(--page-gutter);
+  height: 2px;
+}
+
+.route::before {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(247, 247, 245, 0.18);
+  content: "";
+}
+
+.route span {
+  position: absolute;
+  top: 0;
+  left: min(var(--route-start), 51.5%);
+  width: max(calc(51.5% - var(--route-start)), calc(var(--route-start) - 51.5%));
+  height: 2px;
+  background: var(--accent-red);
+}
+
+.controls {
+  position: absolute;
+  bottom: 92px;
+  left: var(--page-gutter);
+  display: flex;
+  gap: 72px;
+}
+
+.controls button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  gap: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(247, 247, 245, 0.78);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+}
+
+.controls svg {
+  width: 30px;
+  height: 30px;
+}
+
+.backArrow {
+  transform: rotate(180deg);
+}
+
+.termNote {
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: 96px;
+  margin: 0;
+  color: rgba(247, 247, 245, 0.62);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1199px) {
+  .intro h2 {
+    font-size: clamp(64px, 7vw, 82px);
+  }
+
+  .activeStage {
+    left: 36%;
+  }
+
+  .activeNumber {
+    font-size: clamp(170px, 19vw, 230px);
+  }
+
+  .activeCopy h3 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 899px) {
+  .process,
+  .frame {
+    min-height: 1160px;
+  }
+
+  .scene {
+    bottom: auto;
+    height: 680px;
+    background-position: 53% top;
+    background-size: auto 680px;
+    background-repeat: no-repeat;
+  }
+
+  .vignette {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.12) 0%,
+      rgba(0, 0, 0, 0.14) 44%,
+      #101112 61%
+    );
+  }
+
+  .intro {
+    top: 96px;
+  }
+
+  .intro h2 {
+    font-size: clamp(52px, 8.4vw, 68px);
+  }
+
+  .activeStage {
+    top: 354px;
+    right: var(--page-gutter);
+    left: auto;
+    grid-template-columns: auto minmax(190px, 260px);
+  }
+
+  .activeNumber {
+    font-size: 170px;
+  }
+
+  .activeCopy {
+    margin-left: 12px;
+    transform: none;
+  }
+
+  .activeCopy h3 {
+    font-size: 38px;
+  }
+
+  .activeCopy p {
+    font-size: 16px;
+  }
+
+  .stageMap {
+    top: 692px;
+    right: var(--page-gutter);
+    bottom: 142px;
+    left: var(--page-gutter);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    border-left: 1px solid rgba(247, 247, 245, 0.2);
+  }
+
+  .stageItem {
+    position: static;
+    display: flex;
+    align-items: center;
+    transform: none;
+  }
+
+  .stageItem button {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    padding-left: 20px;
+  }
+
+  .currentStage {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .currentStage::before {
+    position: absolute;
+    left: -4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    content: "";
+  }
+
+  .route {
+    display: none;
+  }
+
+  .controls {
+    right: var(--page-gutter);
+    bottom: 70px;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .termNote {
+    display: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .process,
+  .frame {
+    min-height: 1120px;
+  }
+
+  .intro {
+    top: 84px;
+  }
+
+  .intro > p {
+    margin-bottom: 18px;
+    font-size: 11px;
+  }
+
+  .intro h2 {
+    font-size: 45px;
+  }
+
+  .scene {
+    height: 620px;
+    background-size: auto 620px;
+  }
+
+  .activeStage {
+    top: 346px;
+    right: 12px;
+    grid-template-columns: auto 178px;
+  }
+
+  .activeNumber {
+    font-size: 116px;
+  }
+
+  .activeCopy h3 {
+    font-size: 31px;
+  }
+
+  .activeCopy p {
+    margin-top: 14px;
+    font-size: 14px;
+  }
+
+  .stageMap {
+    top: 638px;
+    bottom: 138px;
+  }
+
+  .stageItem button {
+    font-size: 14px;
+  }
+
+  .controls {
+    bottom: 54px;
+  }
+
+  .controls button {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .controls svg {
+    width: 22px;
+    height: 22px;
+  }
+}

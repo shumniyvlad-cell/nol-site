@@ -1,0 +1,264 @@
+.problem {
+  position: relative;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: #090909;
+  color: var(--white);
+}
+
+.scene,
+.vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.scene {
+  z-index: -2;
+  background-image: image-set(
+    url("/media/problem-documentary.avif") type("image/avif"),
+    url("/media/problem-documentary.webp") type("image/webp")
+  );
+  background-position: center;
+  background-size: cover;
+}
+
+.vignette {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.16), transparent 46%, rgba(0, 0, 0, 0.38)),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.14), transparent 30%, rgba(0, 0, 0, 0.1));
+}
+
+.frame {
+  position: relative;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: max(900px, 100svh);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+.projection {
+  position: absolute;
+  top: clamp(146px, 16vh, 176px);
+  left: calc(50% + 8px);
+  width: min(42%, 620px);
+  color: rgba(173, 192, 202, 0.68);
+  font-family: var(--font-plex-mono), monospace;
+  text-shadow:
+    0 0 8px rgba(155, 187, 202, 0.12),
+    0 0 30px rgba(155, 187, 202, 0.08);
+  animation: projector-in 1100ms 120ms var(--ease-standard) both;
+}
+
+.title {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(54px, 4.1vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1.3;
+}
+
+.body {
+  max-width: 590px;
+  margin: 42px 0 0;
+  font-size: clamp(17px, 1.42vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.53;
+}
+
+.body br {
+  display: block;
+  content: "";
+  margin-top: 4px;
+}
+
+.observationRail {
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: 30px;
+  left: var(--page-gutter);
+  display: grid;
+  grid-template-columns: 104px 1.38fr 1.08fr 1.42fr;
+  align-items: center;
+  min-height: 58px;
+  border-top: 1px solid rgba(247, 247, 245, 0.48);
+  color: rgba(247, 247, 245, 0.72);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.observationRail p {
+  min-height: 28px;
+  margin: 0;
+  border-left: 1px solid rgba(247, 247, 245, 0.48);
+  padding: 7px 24px 0;
+}
+
+.timecode {
+  padding-top: 7px;
+  font-size: 10px;
+}
+
+@keyframes projector-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(8px);
+  }
+
+  45% {
+    opacity: 0.38;
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1199px) {
+  .projection {
+    top: 150px;
+    left: 51%;
+    width: 43%;
+  }
+
+  .title {
+    font-size: clamp(48px, 5.2vw, 62px);
+  }
+
+  .body {
+    margin-top: 40px;
+    font-size: clamp(16px, 1.7vw, 19px);
+  }
+
+  .observationRail {
+    grid-template-columns: 88px 1.2fr 1fr 1.25fr;
+  }
+}
+
+@media (max-width: 899px) {
+  .problem,
+  .frame {
+    min-height: 980px;
+  }
+
+  .scene {
+    background-position: 38% center;
+  }
+
+  .vignette {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.1) 34%,
+        rgba(0, 0, 0, 0.76) 62%,
+        rgba(0, 0, 0, 0.92) 100%
+      );
+  }
+
+  .projection {
+    top: auto;
+    right: var(--page-gutter);
+    bottom: 224px;
+    left: var(--page-gutter);
+    width: auto;
+    color: rgba(223, 230, 232, 0.82);
+  }
+
+  .title {
+    max-width: 680px;
+    font-family: var(--font-manrope), Arial, sans-serif;
+    font-size: clamp(42px, 7.2vw, 58px);
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+  }
+
+  .body {
+    max-width: 600px;
+    margin-top: 28px;
+    font-family: var(--font-manrope), Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+  }
+
+  .observationRail {
+    right: var(--page-gutter);
+    bottom: 24px;
+    left: var(--page-gutter);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    min-height: 148px;
+  }
+
+  .observationRail p {
+    grid-column: 2;
+    min-height: 42px;
+    padding: 11px 0 8px 16px;
+    border-top: 1px solid rgba(247, 247, 245, 0.2);
+    border-left: 1px solid rgba(247, 247, 245, 0.34);
+  }
+
+  .observationRail p:first-of-type {
+    border-top: 0;
+  }
+
+  .timecode {
+    grid-row: 1 / span 3;
+    align-self: start;
+    padding-top: 13px;
+  }
+}
+
+@media (max-width: 599px) {
+  .problem,
+  .frame {
+    min-height: 940px;
+  }
+
+  .frame {
+    padding-inline: var(--page-gutter);
+  }
+
+  .scene {
+    background-position: 34% top;
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+  }
+
+  .projection {
+    bottom: 218px;
+  }
+
+  .title {
+    max-width: 350px;
+    font-size: clamp(39px, 11vw, 48px);
+  }
+
+  .body {
+    max-width: 350px;
+    margin-top: 24px;
+    font-size: 16px;
+  }
+
+  .body br {
+    display: none;
+  }
+
+  .observationRail {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projection {
+    animation: none;
+  }
+}

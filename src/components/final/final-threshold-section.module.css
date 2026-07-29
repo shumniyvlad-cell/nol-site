@@ -1,0 +1,232 @@
+.final {
+  position: relative;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: #0a0a0a;
+  color: #111;
+}
+
+.scene,
+.vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.scene {
+  z-index: -2;
+  background-image: image-set(
+    url("/media/final-threshold-desktop.avif") type("image/avif"),
+    url("/media/final-threshold-desktop.webp") type("image/webp")
+  );
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.015);
+}
+
+.vignette {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.12), transparent 34%, transparent 72%, rgba(5, 5, 5, 0.55)),
+    linear-gradient(90deg, rgba(5, 5, 5, 0.14), transparent 35%, transparent 70%, rgba(5, 5, 5, 0.08));
+}
+
+.redThreshold {
+  position: absolute;
+  top: 18%;
+  left: 70.6%;
+  width: 26px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--accent-red);
+}
+
+.frame {
+  position: relative;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: max(900px, 100svh);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+.copy {
+  position: absolute;
+  top: 19.5%;
+  left: 34.6%;
+  width: min(48%, 690px);
+}
+
+.copy h2 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(50px, 3.9vw, 60px);
+  font-weight: 520;
+  letter-spacing: -0.052em;
+  line-height: 1.03;
+  text-wrap: balance;
+}
+
+.copy > p:not(.note) {
+  max-width: 520px;
+  margin: 34px 0 0;
+  font-size: clamp(18px, 1.42vw, 22px);
+  font-weight: 470;
+  line-height: 1.48;
+}
+
+.actions {
+  display: grid;
+  width: min(100%, 450px);
+  gap: 16px;
+  margin-top: clamp(78px, 9vh, 100px);
+}
+
+.actions a {
+  display: grid;
+  grid-template-columns: auto 1fr 28px;
+  min-height: 48px;
+  align-items: center;
+  gap: 18px;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.actionRule {
+  height: 1px;
+  background: rgba(17, 17, 17, 0.44);
+  transform: scaleX(0.76);
+  transform-origin: right;
+  transition: transform 220ms var(--ease-out);
+}
+
+.actions a:hover .actionRule,
+.actions a:focus-visible .actionRule {
+  transform: scaleX(1);
+}
+
+.actions svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 180ms var(--ease-out);
+}
+
+.actions a:hover svg,
+.actions a:focus-visible svg {
+  transform: translateX(4px);
+}
+
+.note {
+  margin: 18px 0 0;
+  color: rgba(17, 17, 17, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1199px) {
+  .copy {
+    left: 32%;
+    width: min(54%, 610px);
+  }
+
+  .redThreshold {
+    left: 72%;
+  }
+}
+
+@media (max-width: 899px) {
+  .scene {
+    background-image: image-set(
+      url("/media/final-threshold-mobile.avif") type("image/avif"),
+      url("/media/final-threshold-mobile.webp") type("image/webp")
+    );
+    background-position: center;
+  }
+
+  .copy {
+    top: 17%;
+    left: 18%;
+    width: min(66%, 570px);
+  }
+
+  .copy h2 {
+    font-size: clamp(46px, 6.4vw, 58px);
+  }
+
+  .redThreshold {
+    top: 15%;
+    left: 78%;
+  }
+}
+
+@media (max-width: 599px) {
+  .final,
+  .frame {
+    min-height: 900px;
+  }
+
+  .scene {
+    background-position: center;
+    transform: scale(1.01);
+  }
+
+  .vignette {
+    background:
+      linear-gradient(180deg, rgba(5, 5, 5, 0.28), transparent 15%, transparent 68%, rgba(5, 5, 5, 0.68)),
+      linear-gradient(90deg, rgba(5, 5, 5, 0.12), transparent 28%, transparent 72%, rgba(5, 5, 5, 0.12));
+  }
+
+  .redThreshold {
+    top: 128px;
+    right: 28px;
+    left: auto;
+    width: 20px;
+  }
+
+  .copy {
+    top: 150px;
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .copy h2 {
+    max-width: 340px;
+    font-size: clamp(43px, 12.5vw, 50px);
+    line-height: 1.02;
+  }
+
+  .copy > p:not(.note) {
+    max-width: 330px;
+    margin-top: 24px;
+    font-size: 18px;
+  }
+
+  .actions {
+    width: 100%;
+    margin-top: 64px;
+  }
+
+  .actions a {
+    grid-template-columns: auto 1fr 26px;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .note {
+    max-width: 320px;
+    margin-top: 16px;
+    color: rgba(247, 247, 245, 0.68);
+    font-size: 10px;
+    text-shadow: 0 1px 8px rgba(5, 5, 5, 0.42);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    transform: none;
+  }
+
+  .actions a:hover svg,
+  .actions a:focus-visible svg {
+    transform: none;
+  }
+}

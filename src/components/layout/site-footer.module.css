@@ -1,0 +1,136 @@
+.footer {
+  position: relative;
+  z-index: 4;
+  min-height: 78px;
+  margin-top: -78px;
+  color: rgba(247, 247, 245, 0.58);
+}
+
+.footer::before {
+  position: absolute;
+  inset: -34px 0 0;
+  z-index: -1;
+  background: linear-gradient(180deg, transparent, rgba(5, 5, 5, 0.82));
+  content: "";
+  pointer-events: none;
+}
+
+.solid {
+  min-height: 150px;
+  margin-top: 0;
+  background: var(--black);
+}
+
+.solid::before {
+  display: none;
+}
+
+.solid .inner {
+  min-height: 150px;
+}
+
+.inner {
+  display: flex;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: 78px;
+  align-items: center;
+  gap: 28px;
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+  font-size: 13px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(247, 247, 245, 0.72);
+}
+
+.brand svg {
+  width: 20px;
+  height: 20px;
+}
+
+.inner nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
+.inner nav a {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  transition: color 180ms ease;
+}
+
+.inner nav a::before {
+  margin-inline: 14px;
+  color: rgba(247, 247, 245, 0.3);
+  content: "/";
+}
+
+.inner nav a:hover,
+.inner nav a:focus-visible {
+  color: var(--white);
+}
+
+@media (max-width: 899px) {
+  .inner {
+    gap: 18px;
+    padding-inline: 32px;
+    font-size: 12px;
+  }
+
+  .inner nav a::before {
+    margin-inline: 10px;
+  }
+}
+
+@media (max-width: 599px) {
+  .footer {
+    min-height: 186px;
+    margin-top: -186px;
+  }
+
+  .footer::before {
+    inset: -80px 0 0;
+  }
+
+  .solid {
+    min-height: 220px;
+    margin-top: 0;
+  }
+
+  .solid .inner {
+    min-height: 220px;
+  }
+
+  .inner {
+    display: grid;
+    min-height: 186px;
+    align-content: end;
+    gap: 4px;
+    padding: 24px 20px 18px;
+    font-size: 11px;
+  }
+
+  .brand {
+    min-height: 36px;
+  }
+
+  .inner nav {
+    align-items: flex-start;
+  }
+
+  .inner nav a {
+    min-height: 34px;
+  }
+
+  .inner nav a:first-child::before {
+    margin-left: 0;
+    content: "";
+  }
+}

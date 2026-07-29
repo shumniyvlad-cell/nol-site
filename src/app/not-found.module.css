@@ -1,0 +1,61 @@
+.notFound {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--white);
+  padding: 120px var(--page-gutter);
+}
+
+.notFound > span {
+  position: absolute;
+  left: -4vw;
+  color: rgba(247, 247, 245, 0.06);
+  font-size: min(82vw, 980px);
+  font-weight: 500;
+  letter-spacing: -0.14em;
+  line-height: 0.7;
+}
+
+.notFound > div {
+  position: relative;
+  width: min(100%, 760px);
+}
+
+.notFound > div > p:first-child {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.notFound h1 {
+  margin: 50px 0 0;
+  font-size: clamp(62px, 8vw, 112px);
+  font-weight: 550;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
+}
+
+.notFound h1 + p {
+  max-width: 520px;
+  margin: 34px 0 0;
+  color: rgba(247, 247, 245, 0.68);
+  font-size: 20px;
+}
+
+.notFound a {
+  display: flex;
+  width: min(100%, 360px);
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 48px;
+  border-bottom: 1px solid var(--white);
+}
+
+.notFound svg {
+  width: 26px;
+  height: 26px;
+}

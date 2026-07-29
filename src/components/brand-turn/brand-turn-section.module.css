@@ -1,0 +1,436 @@
+.brandTurn {
+  position: relative;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(90deg, #111 0 51%, #f2f2ef 51%);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: image-set(
+    url("/media/brand-turn-fold.avif") type("image/avif"),
+    url("/media/brand-turn-fold.webp") type("image/webp")
+  );
+  background-position: center;
+  background-size: cover;
+}
+
+.frame {
+  position: relative;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: max(900px, 100svh);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+.leftCopy,
+.rightCopy {
+  position: absolute;
+}
+
+.leftCopy {
+  top: clamp(108px, 11.5vh, 124px);
+  left: var(--page-gutter);
+  width: min(38%, 540px);
+  color: var(--white);
+}
+
+.leftTitle {
+  margin: 0;
+  font-size: clamp(40px, 3.2vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.leftCopy p,
+.rightCopy p {
+  margin: 42px 0 0;
+  font-size: clamp(16px, 1.32vw, 20px);
+  font-weight: 440;
+  line-height: 1.3;
+}
+
+.leftCopy p {
+  max-width: 430px;
+  color: rgba(247, 247, 245, 0.72);
+}
+
+.rightCopy {
+  top: clamp(392px, 40.5vh, 416px);
+  right: var(--page-gutter);
+  width: min(34%, 470px);
+  color: #0a0a0a;
+}
+
+.rightCopy h3 {
+  margin: 0;
+  font-size: clamp(38px, 3vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.04;
+}
+
+.statementBreak {
+  display: block;
+  margin-top: 28px;
+}
+
+.rightCopy p {
+  max-width: 340px;
+  margin-top: 26px;
+  color: rgba(10, 10, 10, 0.78);
+}
+
+.trace {
+  position: absolute;
+  right: 30%;
+  bottom: 36px;
+  left: 24%;
+  height: 128px;
+}
+
+.traceLine {
+  position: absolute;
+  top: 63px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(247, 247, 245, 0.12),
+    rgba(247, 247, 245, 0.44) 48%,
+    rgba(10, 10, 10, 0.42)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: trace-line-in 900ms 380ms var(--ease-standard) forwards;
+}
+
+.state {
+  position: absolute;
+  top: 0;
+  width: 128px;
+  height: 128px;
+  transform: translateX(-50%);
+}
+
+.state1 {
+  left: 6%;
+}
+
+.state2 {
+  left: 35%;
+}
+
+.state3 {
+  left: 68%;
+}
+
+.state4 {
+  left: 95%;
+}
+
+.stateVisual {
+  position: absolute;
+  inset: 17px;
+  display: block;
+  border-radius: 50%;
+}
+
+.state1 .stateVisual {
+  border: 1px dashed rgba(247, 247, 245, 0.82);
+}
+
+.state1 .stateVisual::before {
+  position: absolute;
+  inset: -8px;
+  border: 1px dashed rgba(247, 247, 245, 0.24);
+  border-radius: inherit;
+  content: "";
+}
+
+.state2 .stateVisual {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(247, 247, 245, 0.92) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 88% 50%, rgba(247, 247, 245, 0.62) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 50% 100%, rgba(247, 247, 245, 0.8) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 12% 50%, rgba(247, 247, 245, 0.48) 0 1px, transparent 1.7px);
+  background-size: 9px 9px;
+  box-shadow:
+    inset 0 0 18px rgba(247, 247, 245, 0.14),
+    0 0 24px rgba(247, 247, 245, 0.1);
+  mask-image: radial-gradient(circle, transparent 47%, #000 49% 58%, transparent 61%);
+}
+
+.state3 .stateVisual {
+  border: 14px solid rgba(215, 215, 210, 0.58);
+  box-shadow:
+    inset 4px 2px 8px rgba(0, 0, 0, 0.25),
+    4px 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.state4 .stateVisual {
+  border: 4px solid rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.78),
+    0 0 28px rgba(255, 255, 255, 0.3);
+}
+
+.state4 .stateVisual::after {
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.state {
+  opacity: 0;
+  animation: state-in 560ms var(--ease-out) forwards;
+}
+
+.state1 {
+  animation-delay: 320ms;
+}
+
+.state2 {
+  animation-delay: 520ms;
+}
+
+.state3 {
+  animation-delay: 720ms;
+}
+
+.state4 {
+  animation-delay: 920ms;
+}
+
+@keyframes trace-line-in {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes state-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 1199px) {
+  .leftCopy {
+    top: 116px;
+  }
+
+  .leftTitle,
+  .rightCopy h3 {
+    font-size: clamp(36px, 3.8vw, 46px);
+  }
+
+  .rightCopy {
+    top: 38%;
+    width: 32%;
+  }
+
+  .leftCopy p,
+  .rightCopy p {
+    font-size: 16px;
+  }
+
+  .trace {
+    right: 18%;
+    left: 16%;
+  }
+}
+
+@media (max-width: 899px) {
+  .brandTurn {
+    min-height: 1180px;
+    background: linear-gradient(180deg, #111 0 49%, #f2f2ef 49%);
+  }
+
+  .scene {
+    top: 250px;
+    bottom: 270px;
+    background-position: center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+  }
+
+  .frame {
+    min-height: 1180px;
+  }
+
+  .leftCopy {
+    top: 96px;
+    right: var(--page-gutter);
+    left: var(--page-gutter);
+    width: auto;
+  }
+
+  .leftTitle {
+    max-width: 620px;
+    font-size: clamp(40px, 7.2vw, 58px);
+  }
+
+  .leftCopy p {
+    max-width: 460px;
+    margin-top: 30px;
+    font-size: 17px;
+  }
+
+  .rightCopy {
+    top: 744px;
+    right: var(--page-gutter);
+    left: max(30%, var(--page-gutter));
+    width: auto;
+  }
+
+  .rightCopy h3 {
+    font-size: clamp(36px, 6.6vw, 50px);
+  }
+
+  .rightCopy p {
+    font-size: 17px;
+  }
+
+  .trace {
+    right: var(--page-gutter);
+    bottom: 22px;
+    left: var(--page-gutter);
+    height: 112px;
+  }
+
+  .state {
+    width: 96px;
+    height: 96px;
+  }
+
+  .stateVisual {
+    inset: 12px;
+  }
+
+  .traceLine {
+    top: 48px;
+    background: rgba(10, 10, 10, 0.3);
+  }
+
+  .state1 .stateVisual {
+    border-color: rgba(10, 10, 10, 0.72);
+  }
+
+  .state1 .stateVisual::before {
+    border-color: rgba(10, 10, 10, 0.2);
+  }
+
+  .state2 .stateVisual {
+    background:
+      radial-gradient(circle at 50% 0%, rgba(10, 10, 10, 0.86) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 88% 50%, rgba(10, 10, 10, 0.56) 0 1px, transparent 1.7px),
+      radial-gradient(circle at 50% 100%, rgba(10, 10, 10, 0.74) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 12% 50%, rgba(10, 10, 10, 0.46) 0 1px, transparent 1.7px);
+    background-size: 9px 9px;
+    box-shadow:
+      inset 0 0 18px rgba(10, 10, 10, 0.12),
+      0 0 24px rgba(10, 10, 10, 0.08);
+  }
+
+  .state3 .stateVisual {
+    border-color: rgba(10, 10, 10, 0.34);
+  }
+
+  .state4 .stateVisual {
+    border-color: rgba(10, 10, 10, 0.38);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.7),
+      0 0 18px rgba(10, 10, 10, 0.12);
+  }
+}
+
+@media (max-width: 599px) {
+  .brandTurn,
+  .frame {
+    min-height: 1360px;
+  }
+
+  .scene {
+    top: 350px;
+    bottom: 450px;
+    background-size: auto 100%;
+  }
+
+  .leftCopy {
+    top: 86px;
+  }
+
+  .leftTitle {
+    max-width: 350px;
+    font-size: 40px;
+  }
+
+  .leftCopy p {
+    max-width: 350px;
+    font-size: 16px;
+  }
+
+  .rightCopy {
+    top: 820px;
+    left: 31%;
+  }
+
+  .rightCopy h3 {
+    font-size: 38px;
+  }
+
+  .rightCopy p {
+    font-size: 16px;
+  }
+
+  .trace {
+    height: 86px;
+  }
+
+  .state {
+    width: 72px;
+    height: 72px;
+  }
+
+  .stateVisual {
+    inset: 8px;
+  }
+
+  .traceLine {
+    top: 36px;
+  }
+
+  .state3 .stateVisual {
+    border-width: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .traceLine,
+  .state {
+    animation: none;
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+
+  .traceLine {
+    transform: scaleX(1);
+  }
+}

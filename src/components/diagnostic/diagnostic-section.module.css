@@ -1,0 +1,415 @@
+.diagnostic {
+  position: relative;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--surface-light);
+  color: #0a0a0a;
+}
+
+.paperNoise {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.28;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(0, 0, 0, 0.045) 0 0.6px, transparent 0.8px),
+    radial-gradient(circle at 72% 58%, rgba(0, 0, 0, 0.035) 0 0.6px, transparent 0.8px);
+  background-size:
+    7px 7px,
+    11px 11px;
+}
+
+.frame {
+  position: relative;
+  width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
+  min-height: max(900px, 100svh);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+.identity {
+  position: absolute;
+  top: 98px;
+  left: var(--page-gutter);
+  z-index: 2;
+  display: grid;
+}
+
+.stepMeta {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.stepNumber {
+  position: absolute;
+  top: clamp(152px, 15.5vh, 170px);
+  left: -28px;
+  z-index: -1;
+  color: rgba(10, 10, 10, 0.11);
+  font-size: clamp(430px, 42vw, 650px);
+  font-weight: 500;
+  letter-spacing: -0.11em;
+  line-height: 0.72;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.stepDots {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  display: grid;
+  gap: 38px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepDots li {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.34);
+}
+
+.stepDots .activeStep {
+  background: #0a0a0a;
+  box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.08);
+}
+
+.form {
+  position: absolute;
+  inset: 0 var(--page-gutter) 0;
+}
+
+.form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.question {
+  position: absolute;
+  top: clamp(340px, 36vh, 374px);
+  left: 24%;
+  width: min(70%, 940px);
+  margin: 0;
+  padding: 0;
+  font-size: clamp(50px, 4.2vw, 64px);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.options {
+  position: absolute;
+  top: clamp(505px, 51.5vh, 540px);
+  right: 0;
+  width: min(59%, 900px);
+  border-top: 1px solid rgba(10, 10, 10, 0.6);
+}
+
+.option {
+  min-height: 88px;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.5);
+}
+
+.option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option label {
+  display: flex;
+  align-items: center;
+  min-height: 88px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: clamp(19px, 1.48vw, 23px);
+  font-weight: 500;
+  line-height: 1.25;
+  transition: color 160ms ease;
+}
+
+.option label:hover {
+  color: rgba(10, 10, 10, 0.62);
+}
+
+.option input:focus-visible + label {
+  outline: 2px solid var(--accent-red);
+  outline-offset: -2px;
+}
+
+.optionDot {
+  flex: 0 0 auto;
+  width: 0;
+  height: 0;
+  margin-right: 0;
+  border-radius: 50%;
+  background: var(--accent-red);
+  box-shadow:
+    0 0 0 8px rgba(255, 255, 255, 0.72),
+    0 0 0 10px rgba(10, 10, 10, 0.05);
+  transition:
+    width 180ms var(--ease-out),
+    height 180ms var(--ease-out),
+    margin-right 180ms var(--ease-out);
+}
+
+.option input:checked + label .optionDot {
+  width: 20px;
+  height: 20px;
+  margin-right: 28px;
+}
+
+.privacy {
+  position: absolute;
+  right: 0;
+  bottom: 78px;
+  margin: 0;
+  color: rgba(10, 10, 10, 0.42);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 10px;
+}
+
+.actions {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button,
+.resultBack {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  gap: 14px;
+  padding: 0 0 4px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: #0a0a0a;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.actions button svg,
+.resultLink svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 180ms var(--ease-out);
+}
+
+.backArrow {
+  transform: rotate(180deg);
+}
+
+.actions button:last-child:hover svg,
+.actions button:last-child:focus-visible svg,
+.resultLink:hover svg,
+.resultLink:focus-visible svg {
+  transform: translateX(4px);
+}
+
+.actions button:first-child:hover .backArrow,
+.actions button:first-child:focus-visible .backArrow {
+  transform: rotate(180deg) translateX(4px);
+}
+
+.actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.28;
+}
+
+.result {
+  position: absolute;
+  top: clamp(130px, 15vh, 150px);
+  right: var(--page-gutter);
+  width: min(68%, 940px);
+}
+
+.result h2 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(48px, 3.8vw, 60px);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+}
+
+.result p {
+  max-width: 650px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.resultLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  margin-top: 36px;
+  gap: 32px;
+  border-bottom: 1px solid currentColor;
+  font-weight: 600;
+}
+
+.resultBack {
+  display: flex;
+  margin-top: 20px;
+  color: rgba(10, 10, 10, 0.52);
+  font-size: 13px;
+}
+
+.complete,
+.complete .frame {
+  min-height: max(980px, 100svh);
+}
+
+@media (max-width: 1199px) {
+  .question {
+    left: 24%;
+    width: 72%;
+    font-size: clamp(48px, 5.2vw, 62px);
+  }
+
+  .options {
+    width: 68%;
+  }
+}
+
+@media (max-width: 899px) {
+  .diagnostic,
+  .frame {
+    min-height: 960px;
+  }
+
+  .identity {
+    top: 88px;
+  }
+
+  .stepNumber {
+    top: 146px;
+    left: -18px;
+    font-size: clamp(360px, 62vw, 520px);
+  }
+
+  .question {
+    top: 350px;
+    left: 10%;
+    width: 84%;
+    font-size: clamp(44px, 6.8vw, 58px);
+  }
+
+  .options {
+    top: 500px;
+    width: 80%;
+  }
+}
+
+@media (max-width: 599px) {
+  .diagnostic,
+  .frame {
+    min-height: max(844px, 100svh);
+  }
+
+  .identity {
+    top: 84px;
+  }
+
+  .stepMeta {
+    font-size: 11px;
+  }
+
+  .stepNumber {
+    top: 126px;
+    left: -24px;
+    font-size: 300px;
+    letter-spacing: -0.12em;
+  }
+
+  .stepDots {
+    top: 56px;
+    right: 0;
+    gap: 27px;
+  }
+
+  .question {
+    top: 346px;
+    left: 0;
+    width: 100%;
+    font-size: clamp(38px, 11vw, 46px);
+    line-height: 1.05;
+  }
+
+  .options {
+    top: 474px;
+    width: 100%;
+  }
+
+  .option {
+    min-height: 72px;
+  }
+
+  .option label {
+    min-height: 72px;
+    padding: 10px 8px;
+    font-size: 17px;
+  }
+
+  .option input:checked + label .optionDot {
+    width: 18px;
+    height: 18px;
+    margin-right: 22px;
+  }
+
+  .privacy {
+    right: auto;
+    bottom: 68px;
+    left: 0;
+    max-width: 250px;
+    font-size: 9px;
+  }
+
+  .actions {
+    bottom: 16px;
+  }
+
+  .actions button {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .result {
+    top: 150px;
+    right: var(--page-gutter);
+    left: var(--page-gutter);
+    width: auto;
+  }
+
+  .result h2 {
+    font-size: 42px;
+  }
+
+  .result p {
+    margin-top: 20px;
+    font-size: 17px;
+  }
+
+  .complete,
+  .complete .frame {
+    min-height: 1460px;
+  }
+}

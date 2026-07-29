@@ -1,0 +1,663 @@
+.media {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(238px, 17.5vw, 286px);
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  background: #080808;
+  color: var(--white);
+}
+
+.poster {
+  position: relative;
+  min-width: 0;
+  min-height: max(900px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.scene,
+.projectorWash,
+.chairOcclusion {
+  position: absolute;
+  inset: 0;
+}
+
+.scene,
+.chairOcclusion {
+  background-image: image-set(
+    url("/media/media-studio.avif") type("image/avif"),
+    url("/media/media-studio.webp") type("image/webp")
+  );
+  background-position: center;
+  background-size: cover;
+}
+
+.scene {
+  z-index: -3;
+}
+
+.projectorWash {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 42%, rgba(0, 0, 0, 0.08)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 38%, rgba(0, 0, 0, 0.3));
+}
+
+.format {
+  position: absolute;
+  top: 25.8%;
+  left: var(--page-gutter);
+  z-index: 3;
+  margin: 0;
+  color: rgba(247, 247, 245, 0.66);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.projectedTitle {
+  position: absolute;
+  top: 26.5%;
+  left: 27.6%;
+  z-index: 0;
+  display: grid;
+  margin: 0;
+  color: rgba(247, 247, 245, 0.2);
+  font-size: clamp(104px, 9.7vw, 154px);
+  font-weight: 650;
+  letter-spacing: -0.075em;
+  line-height: 0.83;
+  text-shadow: 0 0 22px rgba(247, 247, 245, 0.08);
+}
+
+.chairOcclusion {
+  z-index: 1;
+  clip-path: polygon(42% 51%, 59% 51%, 63% 90%, 37% 90%);
+}
+
+.statement {
+  position: absolute;
+  top: 38%;
+  left: var(--page-gutter);
+  z-index: 3;
+  width: min(32vw, 440px);
+}
+
+.statement h3 {
+  max-width: 390px;
+  margin: 0;
+  font-size: clamp(27px, 2.1vw, 34px);
+  font-weight: 520;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.statement p {
+  max-width: 390px;
+  margin: 24px 0 0;
+  color: rgba(247, 247, 245, 0.82);
+  font-size: clamp(19px, 1.65vw, 25px);
+  line-height: 1.42;
+}
+
+.actions {
+  position: absolute;
+  bottom: 14.5%;
+  left: var(--page-gutter);
+  z-index: 3;
+  display: grid;
+  gap: 24px;
+}
+
+.actions button {
+  display: grid;
+  grid-template-columns: 68px auto;
+  align-items: center;
+  min-height: 72px;
+  gap: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(247, 247, 245, 0.82);
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.actionFrame {
+  position: relative;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  background:
+    linear-gradient(var(--white), var(--white)) left top / 14px 1px no-repeat,
+    linear-gradient(var(--white), var(--white)) left top / 1px 14px no-repeat,
+    linear-gradient(var(--white), var(--white)) right top / 14px 1px no-repeat,
+    linear-gradient(var(--white), var(--white)) right top / 1px 14px no-repeat,
+    linear-gradient(var(--white), var(--white)) left bottom / 14px 1px no-repeat,
+    linear-gradient(var(--white), var(--white)) left bottom / 1px 14px no-repeat,
+    linear-gradient(var(--white), var(--white)) right bottom / 14px 1px no-repeat,
+    linear-gradient(var(--white), var(--white)) right bottom / 1px 14px no-repeat;
+  transition: transform 220ms var(--ease-out);
+}
+
+.actions button:hover .actionFrame,
+.actions button:focus-visible .actionFrame {
+  transform: scale(1.06);
+}
+
+.playRing {
+  position: relative;
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid rgba(247, 247, 245, 0.78);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(247, 247, 245, 0.14);
+}
+
+.playRing span {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--accent-red);
+}
+
+.plus {
+  font-size: 35px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.contactStrip {
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  min-height: max(900px, 100svh);
+  border-left: 1px solid rgba(247, 247, 245, 0.1);
+  background-image:
+    linear-gradient(rgba(5, 5, 5, 0.26), rgba(5, 5, 5, 0.26)),
+    image-set(
+      url("/media/media-contact-strip.avif") type("image/avif"),
+      url("/media/media-contact-strip.webp") type("image/webp")
+    );
+  background-position: center;
+  background-size: cover;
+}
+
+.contactStrip a {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px 30px;
+  border-bottom: 1px solid rgba(247, 247, 245, 0.14);
+  background: linear-gradient(180deg, transparent 28%, rgba(5, 5, 5, 0.78));
+  font-family: var(--font-plex-mono), monospace;
+  font-size: clamp(16px, 1.25vw, 20px);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.contactStrip a:last-child {
+  border-bottom: 0;
+}
+
+.contactStrip a::before {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(247, 247, 245, 0.08);
+  content: "";
+  transition: border-color 180ms ease;
+}
+
+.contactStrip a:hover::before,
+.contactStrip a:focus-visible::before {
+  border-color: rgba(247, 247, 245, 0.4);
+}
+
+.episodeNumber {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  color: rgba(247, 247, 245, 0.32);
+  font-size: 10px;
+}
+
+.contactStrip svg {
+  width: 24px;
+  height: 24px;
+  margin-top: 18px;
+  opacity: 0;
+  transition:
+    opacity 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.contactStrip a:hover svg,
+.contactStrip a:focus-visible svg {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.dialog {
+  width: min(1040px, calc(100vw - 40px));
+  max-width: none;
+  max-height: min(800px, calc(100svh - 40px));
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(247, 247, 245, 0.16);
+  border-radius: 16px;
+  background: var(--surface-dark);
+  color: var(--white);
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.dialogPanel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  min-height: 610px;
+}
+
+.close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(247, 247, 245, 0.18);
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.42);
+  cursor: pointer;
+}
+
+.close span {
+  position: absolute;
+  top: 23px;
+  left: 13px;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+}
+
+.close span:first-child {
+  transform: rotate(45deg);
+}
+
+.close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.dialogStill {
+  display: grid;
+  min-height: 610px;
+  place-items: center;
+  background:
+    linear-gradient(180deg, transparent, rgba(5, 5, 5, 0.38)),
+    image-set(
+      url("/media/media-studio.avif") type("image/avif"),
+      url("/media/media-studio.webp") type("image/webp")
+    );
+  background-position: center;
+  background-size: cover;
+}
+
+.dialogPlay {
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  border: 1px solid rgba(247, 247, 245, 0.74);
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px rgba(247, 247, 245, 0.12),
+    inset 0 0 22px rgba(247, 247, 245, 0.06);
+}
+
+.dialogPlay span {
+  width: 0;
+  height: 0;
+  margin-left: 7px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid var(--white);
+}
+
+.dialogCopy {
+  padding: 82px 46px 42px;
+}
+
+.dialogCopy > p:first-child {
+  margin: 0;
+  color: rgba(247, 247, 245, 0.52);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dialogCopy h3 {
+  margin: 28px 0 0;
+  font-size: clamp(42px, 4vw, 64px);
+  font-weight: 550;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.dialogCopy > p:nth-child(3) {
+  margin: 24px 0 0;
+  color: rgba(247, 247, 245, 0.72);
+  font-size: 16px;
+  line-height: 1.52;
+}
+
+.dialog form {
+  margin-top: 36px;
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.emailField {
+  display: grid;
+  gap: 10px;
+  color: rgba(247, 247, 245, 0.58);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.emailField input {
+  min-height: 52px;
+  padding: 0 14px;
+  border: 1px solid rgba(247, 247, 245, 0.2);
+  border-radius: 12px;
+  background: rgba(5, 5, 5, 0.42);
+  color: var(--white);
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-size: 16px;
+  text-transform: none;
+}
+
+.consent {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 10px;
+  margin-top: 16px;
+  color: rgba(247, 247, 245, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-red);
+}
+
+.consent a {
+  border-bottom: 1px solid currentColor;
+}
+
+.submit {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--white);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.submit:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.submit svg {
+  width: 26px;
+  height: 26px;
+}
+
+.formError,
+.success {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.formError {
+  color: #ff9a94;
+}
+
+.success {
+  color: var(--white);
+}
+
+@media (max-width: 1199px) {
+  .media {
+    grid-template-columns: minmax(0, 1fr) 224px;
+  }
+
+  .projectedTitle {
+    left: 25%;
+    font-size: clamp(94px, 10vw, 120px);
+  }
+
+  .statement {
+    width: min(36vw, 380px);
+  }
+
+  .contactStrip a {
+    padding: 28px 24px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 899px) {
+  .media {
+    display: block;
+    min-height: 1260px;
+  }
+
+  .poster {
+    min-height: 920px;
+  }
+
+  .scene,
+  .chairOcclusion {
+    background-position: 52% center;
+  }
+
+  .format {
+    top: 120px;
+    left: 32px;
+  }
+
+  .projectedTitle {
+    top: 31%;
+    left: 12%;
+    font-size: clamp(82px, 14vw, 112px);
+  }
+
+  .statement {
+    top: 190px;
+    left: 32px;
+    width: min(54vw, 440px);
+  }
+
+  .actions {
+    bottom: 72px;
+    left: 32px;
+    grid-template-columns: repeat(2, auto);
+    gap: 40px;
+  }
+
+  .contactStrip {
+    display: grid;
+    min-height: 340px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: none;
+    border-top: 1px solid rgba(247, 247, 245, 0.1);
+    border-left: 0;
+    background-size: 100% auto;
+  }
+
+  .contactStrip a {
+    border-right: 1px solid rgba(247, 247, 245, 0.14);
+    border-bottom: 0;
+  }
+
+  .contactStrip a:last-child {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .media {
+    min-height: 1570px;
+  }
+
+  .poster {
+    min-height: 1040px;
+  }
+
+  .scene,
+  .chairOcclusion {
+    background-position: 51% center;
+  }
+
+  .projectorWash {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.16), transparent 42%, rgba(0, 0, 0, 0.38)),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 74%);
+  }
+
+  .format {
+    top: 100px;
+    left: 20px;
+    max-width: 300px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .statement {
+    top: 164px;
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .statement h3 {
+    max-width: 330px;
+    font-size: 27px;
+  }
+
+  .statement p {
+    max-width: 330px;
+    margin-top: 18px;
+    font-size: 18px;
+  }
+
+  .projectedTitle {
+    top: 48.5%;
+    left: 20px;
+    font-size: clamp(50px, 14vw, 56px);
+    line-height: 0.88;
+  }
+
+  .chairOcclusion {
+    clip-path: polygon(33% 53%, 70% 53%, 78% 88%, 24% 88%);
+  }
+
+  .actions {
+    right: 20px;
+    bottom: 62px;
+    left: 20px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .actions button {
+    grid-template-columns: 56px auto;
+    min-height: 62px;
+    gap: 18px;
+    font-size: 15px;
+  }
+
+  .actionFrame {
+    width: 52px;
+    height: 52px;
+  }
+
+  .contactStrip {
+    min-height: 530px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .contactStrip a {
+    padding: 26px 20px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(247, 247, 245, 0.14);
+    font-size: 16px;
+  }
+
+  .dialog {
+    width: calc(100vw - 20px);
+    max-height: calc(100svh - 20px);
+  }
+
+  .dialogPanel {
+    display: block;
+  }
+
+  .dialogStill {
+    min-height: 270px;
+  }
+
+  .dialogPlay {
+    width: 72px;
+    height: 72px;
+  }
+
+  .dialogCopy {
+    padding: 38px 20px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actions button:hover .actionFrame,
+  .actions button:focus-visible .actionFrame,
+  .contactStrip a:hover svg,
+  .contactStrip a:focus-visible svg {
+    transform: none;
+  }
+}
