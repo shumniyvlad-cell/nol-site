@@ -92,6 +92,14 @@ export function DiagnosticLeadForm({ answers }: DiagnosticLeadFormProps) {
       return;
     }
 
+    if (process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true") {
+      setSubmissionState("error");
+      setServerMessage(
+        "На временной демонстрационной версии приём заявок отключён.",
+      );
+      return;
+    }
+
     setSubmissionState("submitting");
     setServerMessage("");
 

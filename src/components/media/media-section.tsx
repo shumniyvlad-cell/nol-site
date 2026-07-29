@@ -129,6 +129,14 @@ function MediaTeaserDialog({
   });
 
   const submitPremiere = handleSubmit(async (values) => {
+    if (process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true") {
+      setSubmissionState("error");
+      setServerMessage(
+        "На временной демонстрационной версии подписка отключена.",
+      );
+      return;
+    }
+
     setSubmissionState("submitting");
     setServerMessage("");
 
