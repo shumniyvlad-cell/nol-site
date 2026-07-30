@@ -120,14 +120,18 @@ export function LastPaymentBackground() {
       ref={stageRef}
     >
       <picture className={styles.videoPoster}>
+        <source
+          media="(max-width: 768px)"
+          srcSet="/media/last-payment-mobile-poster.webp"
+        />
         <img
           alt=""
           decoding="async"
           fetchPriority="low"
-          height="941"
+          height="720"
           loading="lazy"
-          src="/media/media-studio.webp"
-          width="1672"
+          src="/media/last-payment-poster.webp"
+          width="1280"
         />
       </picture>
 
@@ -143,7 +147,7 @@ export function LastPaymentBackground() {
           muted
           onPlaying={() => setHasStarted(true)}
           playsInline
-          poster="/media/media-studio.webp"
+          poster="/media/last-payment-poster.webp"
           preload="metadata"
           ref={videoRef}
           tabIndex={-1}

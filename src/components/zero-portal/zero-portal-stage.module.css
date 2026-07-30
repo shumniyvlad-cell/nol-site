@@ -21,9 +21,10 @@
     url("/media/hero-portal-desktop.avif") type("image/avif"),
     url("/media/hero-portal-desktop.webp") type("image/webp")
   );
-  background-position: center calc(50% + 34px);
+  background-position: calc(50% + 88px) calc(50% + 30px);
   background-repeat: no-repeat;
-  background-size: 90% auto;
+  background-size: 82% auto;
+  filter: brightness(0.84);
   -webkit-mask-image: radial-gradient(
     ellipse 82% 92% at 73% 57%,
     #000 48%,
@@ -37,7 +38,7 @@
 }
 
 .fallbackHidden {
-  opacity: 0.78;
+  opacity: 0.74;
 }
 
 .canvas {
@@ -47,24 +48,24 @@
 }
 
 .canvasReady {
-  opacity: 0.42;
+  opacity: 0.3;
 }
 
 .volumetricLight {
   position: absolute;
-  inset: 9% -8% -2% 42%;
-  opacity: 0.34;
+  inset: 12% -10% 0 48%;
+  opacity: 0.26;
   background:
     radial-gradient(
       ellipse 20% 54% at 58% 48%,
-      rgba(255, 255, 255, 0.12),
-      rgba(255, 255, 255, 0.035) 34%,
+      rgba(255, 255, 255, 0.085),
+      rgba(255, 255, 255, 0.025) 34%,
       transparent 70%
     ),
     conic-gradient(
       from 253deg at 57% 58%,
       transparent 0deg,
-      rgba(255, 255, 255, 0.035) 22deg,
+      rgba(255, 255, 255, 0.026) 22deg,
       transparent 54deg
     );
   filter: blur(18px);
@@ -116,7 +117,7 @@
 
   100% {
     opacity: 1;
-    filter: brightness(1) contrast(1);
+    filter: brightness(0.84) contrast(1);
     transform: scale(1);
   }
 }
@@ -128,19 +129,19 @@
   }
 
   to {
-    opacity: 0.34;
+    opacity: 0.26;
     transform: scale(1.02);
   }
 }
 
 @keyframes volume-breathe {
   from {
-    opacity: 0.26;
+    opacity: 0.2;
     transform: scale(0.99, 0.985);
   }
 
   to {
-    opacity: 0.37;
+    opacity: 0.29;
     transform: scale(1.025, 1.018);
   }
 }
@@ -151,8 +152,9 @@
       url("/media/hero-portal-mobile.avif") type("image/avif"),
       url("/media/hero-portal-mobile.webp") type("image/webp")
     );
-    background-position: center top;
-    background-size: cover;
+    background-position: right top;
+    background-size: 90% auto;
+    filter: brightness(0.84);
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -161,15 +163,21 @@
     background: linear-gradient(
       180deg,
       rgba(5, 5, 5, 0) 0%,
-      rgba(5, 5, 5, 0) 34%,
-      rgba(5, 5, 5, 0.22) 49%,
-      rgba(5, 5, 5, 0.72) 67%,
-      var(--black) 92%
+      rgba(5, 5, 5, 0) 27%,
+      rgba(5, 5, 5, 0.18) 40%,
+      rgba(5, 5, 5, 0.74) 58%,
+      var(--black) 82%
     );
   }
 
   .volumetricLight {
     display: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .fallback {
+    background-size: 88% auto;
   }
 }
 

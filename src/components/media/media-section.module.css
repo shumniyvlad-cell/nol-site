@@ -1,8 +1,8 @@
 .media {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(238px, 17.5vw, 286px);
-  min-height: max(900px, 100svh);
+  grid-template-columns: minmax(0, 1fr) clamp(270px, 19vw, 310px);
+  min-height: max(800px, 100svh);
   overflow: hidden;
   background: #080808;
   color: var(--white);
@@ -11,14 +11,13 @@
 .poster {
   position: relative;
   min-width: 0;
-  min-height: max(900px, 100svh);
+  min-height: max(800px, 100svh);
   overflow: hidden;
   isolation: isolate;
 }
 
 .videoStage,
-.projectorWash,
-.chairOcclusion {
+.projectorWash {
   position: absolute;
   inset: 0;
 }
@@ -42,7 +41,7 @@
 .videoPoster img,
 .backgroundVideo {
   object-fit: cover;
-  object-position: 20% 50%;
+  object-position: 48% 48%;
 }
 
 .backgroundVideo {
@@ -54,12 +53,6 @@
 
 .backgroundVideoReady {
   opacity: 1;
-}
-
-.chairOcclusion {
-  background-image: url("/media/last-payment-poster.webp");
-  background-position: center;
-  background-size: cover;
 }
 
 .projectorWash {
@@ -74,17 +67,16 @@
     ),
     radial-gradient(
       ellipse 48% 58% at 12% 50%,
-      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.64),
       transparent 100%
     ),
     linear-gradient(
       90deg,
       #050505 0%,
-      #050505 27%,
-      rgba(5, 5, 5, 0.98) 33%,
-      rgba(5, 5, 5, 0.76) 39%,
-      rgba(5, 5, 5, 0.2) 47%,
-      transparent 54%
+      rgba(5, 5, 5, 0.98) 16%,
+      rgba(5, 5, 5, 0.72) 20%,
+      rgba(5, 5, 5, 0.16) 24%,
+      transparent 27%
     );
 }
 
@@ -100,59 +92,12 @@
   letter-spacing: 0.16em;
 }
 
-.titleCoordinateFrame {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 20%;
-  z-index: 0;
-  aspect-ratio: 16 / 9;
-  min-width: 100%;
-  transform: translateX(-20%);
-  container-type: size;
-  pointer-events: none;
-}
-
-.projectedTitle {
-  position: absolute;
-  top: 26.2%;
-  left: 27%;
-  display: grid;
-  width: 62%;
-  margin: 0;
-  color: rgba(247, 247, 245, 0.34);
-  font-family: var(--font-plex-mono), monospace;
-  font-size: clamp(150px, 20.9cqh, 188px);
-  font-weight: 600;
-  letter-spacing: -0.095em;
-  line-height: 1.22;
-  text-shadow:
-    0 0 2px rgba(0, 0, 0, 0.82),
-    0 0 12px rgba(0, 0, 0, 0.58),
-    0 0 24px rgba(247, 247, 245, 0.08);
-  mix-blend-mode: screen;
-}
-
-.projectedTitle span {
-  width: max-content;
-  transform: scaleX(0.97);
-  transform-origin: left center;
-}
-
-.projectedTitle span:last-child {
-  transform: scaleX(1.42);
-}
-
-.chairOcclusion {
-  display: none;
-}
-
 .statement {
   position: absolute;
   top: 40.5%;
   left: var(--page-gutter);
   z-index: 3;
-  width: min(27vw, 330px);
+  width: min(22vw, 260px);
 }
 
 .statement h3 {
@@ -160,7 +105,7 @@
 }
 
 .statement p {
-  max-width: 320px;
+  max-width: 260px;
   margin: 0;
   color: rgba(247, 247, 245, 0.82);
   font-size: clamp(21px, 1.72vw, 26px);
@@ -245,10 +190,10 @@
   position: relative;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  min-height: max(900px, 100svh);
+  min-height: max(800px, 100svh);
   border-left: 1px solid rgba(247, 247, 245, 0.1);
   background-image:
-    linear-gradient(rgba(5, 5, 5, 0.26), rgba(5, 5, 5, 0.26)),
+    linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.4)),
     image-set(
       url("/media/media-contact-strip.avif") type("image/avif"),
       url("/media/media-contact-strip.webp") type("image/webp")
@@ -263,11 +208,11 @@
   min-height: 0;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 34px 30px;
+  padding: 38px 32px;
   border-bottom: 1px solid rgba(247, 247, 245, 0.14);
-  background: linear-gradient(180deg, transparent 28%, rgba(5, 5, 5, 0.78));
+  background: linear-gradient(180deg, transparent 18%, rgba(5, 5, 5, 0.9));
   font-family: var(--font-plex-mono), monospace;
-  font-size: clamp(16px, 1.25vw, 20px);
+  font-size: clamp(17px, 1.28vw, 21px);
   letter-spacing: 0.04em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -529,36 +474,22 @@
 @media (max-width: 1399px) {
   .videoPoster img,
   .backgroundVideo {
-    object-position: 42% 50%;
-  }
-
-  .titleCoordinateFrame {
-    left: 42%;
-    transform: translateX(-42%);
+    object-position: 50% 48%;
   }
 }
 
 @media (max-width: 1199px) {
   .media {
-    grid-template-columns: minmax(0, 1fr) 224px;
+    grid-template-columns: minmax(0, 1fr) 248px;
   }
 
   .videoPoster img,
   .backgroundVideo {
-    object-position: 52% 50%;
-  }
-
-  .titleCoordinateFrame {
-    left: 52%;
-    transform: translateX(-52%);
-  }
-
-  .projectedTitle {
-    font-size: clamp(142px, 20.6cqh, 185px);
+    object-position: 52% 48%;
   }
 
   .statement {
-    width: min(36vw, 380px);
+    width: min(30vw, 300px);
   }
 
   .contactStrip a {
@@ -570,26 +501,16 @@
 @media (max-width: 1099px) {
   .media {
     display: block;
-    min-height: 1260px;
+    min-height: calc(max(768px, 100svh) + 340px);
   }
 
   .poster {
-    min-height: 920px;
+    min-height: max(768px, 100svh);
   }
 
   .videoPoster img,
-  .backgroundVideo,
-  .chairOcclusion {
-    object-position: 52% center;
-  }
-
-  .titleCoordinateFrame {
-    left: 52%;
-    transform: translateX(-52%);
-  }
-
-  .chairOcclusion {
-    background-position: 52% center;
+  .backgroundVideo {
+    object-position: 52% 48%;
   }
 
   .format {
@@ -604,10 +525,10 @@
   }
 
   .actions {
-    bottom: 72px;
+    bottom: 40px;
     left: 32px;
-    grid-template-columns: repeat(2, auto);
-    gap: 40px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .contactStrip {
@@ -630,56 +551,25 @@
   }
 }
 
-@media (max-width: 768px) {
-  .titleCoordinateFrame {
-    right: 0;
-    left: 0;
-    width: 100%;
-    min-width: 0;
-    aspect-ratio: auto;
-    transform: none;
-    container-type: normal;
-  }
-
-  .projectedTitle {
-    top: 48%;
-    right: 24px;
-    left: 24px;
-    width: auto;
-    font-size: clamp(56px, 11vw, 84px);
-    line-height: 1;
-  }
-
-  .projectedTitle span,
-  .projectedTitle span:last-child {
-    transform: none;
-  }
-}
-
 @media (max-width: 599px) {
   .media {
-    min-height: 1570px;
+    min-height: calc(max(800px, 100svh) + 420px);
   }
 
   .poster {
-    min-height: 1040px;
+    min-height: max(800px, 100svh);
   }
 
   .videoPoster img,
-  .backgroundVideo,
-  .chairOcclusion {
-    object-position: 50% center;
-  }
-
-  .chairOcclusion {
-    background-position: 50% center;
+  .backgroundVideo {
+    object-position: 50% 50%;
   }
 
   .projectorWash {
     background:
       radial-gradient(
-        ellipse 88% 34% at 28% 22%,
-        rgba(0, 0, 0, 0.52),
+        ellipse 92% 42% at 30% 24%,
+        rgba(0, 0, 0, 0.64),
         transparent 100%
       ),
       linear-gradient(
@@ -691,7 +581,7 @@
   }
 
   .format {
-    top: 100px;
+    top: 94px;
     left: 20px;
     max-width: 300px;
     font-size: 10px;
@@ -699,7 +589,7 @@
   }
 
   .statement {
-    top: 164px;
+    top: 140px;
     left: 20px;
     width: calc(100% - 40px);
   }
@@ -710,24 +600,12 @@
 
   .statement p {
     max-width: 330px;
-    font-size: 18px;
-  }
-
-  .projectedTitle {
-    top: 48%;
-    right: 20px;
-    left: 20px;
-    font-size: clamp(49px, 13.5vw, 55px);
-    line-height: 1.05;
-  }
-
-  .chairOcclusion {
-    clip-path: polygon(33% 53%, 70% 53%, 78% 88%, 24% 88%);
+    font-size: 17px;
   }
 
   .actions {
     right: 20px;
-    bottom: 62px;
+    bottom: 54px;
     left: 20px;
     grid-template-columns: 1fr;
     gap: 8px;
@@ -735,7 +613,7 @@
 
   .actions button {
     grid-template-columns: 56px auto;
-    min-height: 62px;
+    min-height: 68px;
     gap: 18px;
     font-size: 15px;
   }
@@ -745,8 +623,12 @@
     height: 52px;
   }
 
+  .actions button + button {
+    display: none;
+  }
+
   .contactStrip {
-    min-height: 530px;
+    min-height: 420px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
     background-position: center;
@@ -754,10 +636,26 @@
   }
 
   .contactStrip a {
-    padding: 26px 20px;
+    min-height: 140px;
+    padding: 24px 52px 24px 20px;
     border-right: 0;
     border-bottom: 1px solid rgba(247, 247, 245, 0.14);
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .contactStrip a::before {
+    inset: 8px;
+  }
+
+  .contactStrip svg {
+    position: absolute;
+    right: 20px;
+    bottom: 24px;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    opacity: 0.74;
   }
 
   .dialog {

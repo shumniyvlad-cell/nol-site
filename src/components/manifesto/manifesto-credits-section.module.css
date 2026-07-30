@@ -339,7 +339,7 @@
   }
 
   .frame {
-    padding: 100px 20px 52px;
+    padding: 100px 20px max(88px, env(safe-area-inset-bottom));
   }
 
   .mode {
@@ -354,7 +354,7 @@
 
   .frame h2 {
     margin-top: 28px;
-    font-size: clamp(58px, 17vw, 68px);
+    font-size: clamp(56px, 16vw, 64px);
     line-height: 0.9;
   }
 
@@ -369,61 +369,76 @@
 
   .manifestoStatement {
     max-width: 340px;
-    margin-top: 42px;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    line-height: 1.7;
+    margin-top: 34px;
+    font-family: var(--font-manrope), Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 520;
+    letter-spacing: -0.025em;
+    line-height: 1.48;
+    text-transform: none;
   }
 
   .principles {
-    margin-top: 46px;
+    margin-top: 42px;
   }
 
   .principles ul {
-    display: block;
-    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 18px;
   }
 
   .principles li {
-    min-height: 66px;
-    padding: 20px 0;
+    min-height: 108px;
+    padding: 22px 16px 22px 0;
     border-top: 1px solid rgba(10, 10, 10, 0.2);
-    font-size: 23px;
+    font-size: 20px;
+    line-height: 1.18;
   }
 
   .principles li + li {
+    padding-left: 16px;
+    border-left: 1px solid rgba(10, 10, 10, 0.18);
+  }
+
+  .principles li:nth-child(3) {
     padding-left: 0;
     border-left: 0;
   }
 
   .launch {
-    width: 100%;
-    margin-top: 48px;
+    width: calc(100% + 40px);
+    margin: 72px -20px 0;
+    padding: 38px 20px 42px;
+    border-top: 1px solid rgba(10, 10, 10, 0.22);
+    border-bottom: 1px solid rgba(10, 10, 10, 0.22);
+    background: rgba(255, 255, 255, 0.34);
   }
 
   .launch h3 {
     max-width: 340px;
     margin-top: 16px;
-    font-size: 37px;
+    font-size: 35px;
     line-height: 1.02;
   }
 
   .auditNote {
     max-width: 330px;
-    margin-top: 18px;
+    margin-top: 20px;
     font-size: 10px;
     line-height: 1.6;
   }
 
   .responsibility {
     max-width: 330px;
-    margin-top: 36px;
-    font-size: 10px;
-    line-height: 1.6;
+    margin-top: 34px;
+    padding-right: 20px;
+    font-size: 11px;
+    line-height: 1.65;
   }
 
   .credits {
-    margin-top: 22px;
+    margin-top: 28px;
   }
 
   .credits ul {
@@ -433,12 +448,12 @@
   .credits li {
     display: grid;
     grid-template-columns: 1fr auto;
-    min-height: 70px;
+    min-height: 58px;
     align-content: center;
     gap: 6px 16px;
     border-top: 1px solid rgba(10, 10, 10, 0.18);
     padding-right: 18px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .leader {

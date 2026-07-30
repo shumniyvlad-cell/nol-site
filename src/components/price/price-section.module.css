@@ -243,11 +243,11 @@
 @media (max-width: 599px) {
   .price,
   .frame {
-    min-height: 1280px;
+    min-height: max(844px, 100svh);
   }
 
   .frame {
-    padding: 96px 20px 0;
+    padding: 78px 20px max(22px, env(safe-area-inset-bottom));
   }
 
   .heading > p {
@@ -255,20 +255,22 @@
   }
 
   .heading h2 {
-    margin-top: 62px;
+    margin-top: 30px;
   }
 
   .heading h2 span {
-    font-size: clamp(42px, 12.5vw, 52px);
+    font-size: clamp(36px, 10.5vw, 42px);
     line-height: 1.02;
   }
 
   .heading h2 strong {
-    display: grid;
-    margin-top: 34px;
-    font-size: clamp(68px, 19vw, 74px);
+    display: flex;
+    align-items: baseline;
+    margin-top: 24px;
+    gap: 0.16em;
+    font-size: clamp(54px, 15.6vw, 62px);
     line-height: 0.94;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .heading h2 .priceAmount {
@@ -276,16 +278,15 @@
   }
 
   .colophon {
-    right: 20px;
-    bottom: 0;
-    left: 20px;
+    position: static;
     display: block;
-    min-height: 650px;
+    min-height: 0;
+    margin-top: 36px;
   }
 
   .colophon > * {
     min-height: 0;
-    padding: 24px 0;
+    padding: 13px 0;
   }
 
   .colophon > * + * {
@@ -301,11 +302,62 @@
   }
 
   .action {
-    min-height: 92px;
+    min-height: 68px;
+    padding-bottom: 10px;
+    font-size: 15px;
   }
 
   .action::after {
-    bottom: 20px;
+    bottom: 10px;
     left: 0;
+  }
+
+  .service ul {
+    display: grid;
+    gap: 4px;
+    columns: auto;
+  }
+
+  .service li {
+    break-inside: avoid;
+  }
+
+  .edition {
+    grid-template-columns: minmax(76px, auto) 1fr;
+    gap: 8px 18px;
+  }
+
+  .edition p:not(:first-child) {
+    margin-top: 0;
+  }
+
+  .edition p:nth-of-type(2),
+  .edition p:nth-of-type(3) {
+    grid-column: 1;
+  }
+
+  .edition span:nth-of-type(1),
+  .edition span:nth-of-type(2),
+  .edition span:nth-of-type(3) {
+    grid-column: 2;
+  }
+
+  .edition p {
+    grid-column: 1;
+  }
+
+  .edition span {
+    grid-column: 2;
+  }
+
+  .heading h2 > span:first-child {
+    max-width: 330px;
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .heading h2 .pricePrefix {
+    font-size: 0.56em;
+    letter-spacing: -0.04em;
   }
 }

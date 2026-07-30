@@ -74,6 +74,10 @@
   line-height: 1.04;
 }
 
+.mainStatement {
+  display: inline;
+}
+
 .statementBreak {
   display: block;
   margin-top: 28px;
@@ -88,22 +92,22 @@
 .trace {
   position: absolute;
   right: 30%;
-  bottom: 36px;
+  bottom: 40px;
   left: 24%;
-  height: 128px;
+  height: 108px;
 }
 
 .traceLine {
   position: absolute;
-  top: 63px;
+  top: 54px;
   right: 8%;
   left: 8%;
   height: 1px;
   background: linear-gradient(
     90deg,
     rgba(247, 247, 245, 0.12),
-    rgba(247, 247, 245, 0.44) 48%,
-    rgba(10, 10, 10, 0.42)
+    rgba(247, 247, 245, 0.3) 48%,
+    rgba(10, 10, 10, 0.28)
   );
   transform: scaleX(0);
   transform-origin: left;
@@ -113,8 +117,8 @@
 .state {
   position: absolute;
   top: 0;
-  width: 128px;
-  height: 128px;
+  width: 108px;
+  height: 108px;
   transform: translateX(-50%);
 }
 
@@ -136,13 +140,15 @@
 
 .stateVisual {
   position: absolute;
-  inset: 17px;
+  inset: 15px;
   display: block;
   border-radius: 50%;
+  opacity: 0.68;
 }
 
 .state1 .stateVisual {
   border: 1px dashed rgba(247, 247, 245, 0.82);
+  transform: scale(0.64);
 }
 
 .state1 .stateVisual::before {
@@ -164,6 +170,7 @@
     inset 0 0 18px rgba(247, 247, 245, 0.14),
     0 0 24px rgba(247, 247, 245, 0.1);
   mask-image: radial-gradient(circle, transparent 47%, #000 49% 58%, transparent 61%);
+  transform: scale(0.72);
 }
 
 .state3 .stateVisual {
@@ -171,13 +178,15 @@
   box-shadow:
     inset 4px 2px 8px rgba(0, 0, 0, 0.25),
     4px 4px 12px rgba(0, 0, 0, 0.18);
+  transform: scale(0.82);
 }
 
 .state4 .stateVisual {
-  border: 4px solid rgba(255, 255, 255, 0.94);
+  border: 3px solid rgba(255, 255, 255, 0.82);
   box-shadow:
-    0 0 8px rgba(255, 255, 255, 0.78),
-    0 0 28px rgba(255, 255, 255, 0.3);
+    0 0 7px rgba(255, 255, 255, 0.56),
+    0 0 22px rgba(255, 255, 255, 0.2);
+  transform: scale(0.94);
 }
 
 .state4 .stateVisual::after {
@@ -364,61 +373,103 @@
 @media (max-width: 599px) {
   .brandTurn,
   .frame {
-    min-height: 1360px;
+    min-height: 1400px;
+  }
+
+  .brandTurn {
+    background: linear-gradient(
+      180deg,
+      #111 0 74%,
+      var(--surface-light) 74%
+    );
   }
 
   .scene {
-    top: 350px;
-    bottom: 450px;
+    top: 352px;
+    bottom: 492px;
+    background-position: 50% center;
     background-size: auto 100%;
   }
 
   .leftCopy {
-    top: 86px;
+    top: 88px;
   }
 
   .leftTitle {
     max-width: 350px;
-    font-size: 40px;
+    font-size: 36px;
+    line-height: 1.01;
   }
 
   .leftCopy p {
     max-width: 350px;
+    margin-top: 24px;
     font-size: 16px;
+    line-height: 1.38;
   }
 
   .rightCopy {
-    top: 820px;
-    left: 31%;
+    top: 900px;
+    right: 0;
+    left: 0;
+    width: auto;
   }
 
   .rightCopy h3 {
-    font-size: 38px;
+    font-size: 0;
+    line-height: 1;
+  }
+
+  .mainStatement {
+    display: block;
+    padding: 36px var(--page-gutter) 40px;
+    background: #111;
+    color: var(--white);
+    font-size: 36px;
+    line-height: 1.02;
+  }
+
+  .rightCopy h3 > br {
+    display: none;
+  }
+
+  .statementBreak {
+    margin-top: 0;
+    padding: 46px var(--page-gutter) 0;
+    background: var(--surface-light);
+    color: #0a0a0a;
+    font-size: 36px;
+    line-height: 1.02;
   }
 
   .rightCopy p {
+    max-width: none;
+    margin: 0;
+    padding: 26px var(--page-gutter) 56px;
+    background: var(--surface-light);
+    color: rgba(10, 10, 10, 0.76);
     font-size: 16px;
+    line-height: 1.45;
   }
 
   .trace {
-    height: 86px;
+    display: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .brandTurn,
+  .frame {
+    min-height: 1380px;
   }
 
-  .state {
-    width: 72px;
-    height: 72px;
+  .leftTitle {
+    font-size: 34px;
   }
 
-  .stateVisual {
-    inset: 8px;
-  }
-
-  .traceLine {
-    top: 36px;
-  }
-
-  .state3 .stateVisual {
-    border-width: 9px;
+  .mainStatement,
+  .statementBreak {
+    font-size: 34px;
   }
 }
 

@@ -50,14 +50,9 @@ export function MediaSection() {
 
         <p className={styles.format}>БРЕНД-МЕДИА / ДОКУМЕНТАЛЬНЫЙ СЕРИАЛ</p>
 
-        <div className={styles.titleCoordinateFrame}>
-          <h2 className={styles.projectedTitle} id="media-title">
-            <span>ПОСЛЕДНИЙ</span>
-            <span>ПЛАТЁЖ</span>
-          </h2>
-        </div>
-
-        <div aria-hidden="true" className={styles.chairOcclusion} />
+        <h2 className="sr-only" id="media-title">
+          Последний платёж
+        </h2>
 
         <div className={styles.statement}>
           <h3>Мы говорим о долгах так, как о них обычно не говорят.</h3>
@@ -75,13 +70,6 @@ export function MediaSection() {
               </span>
             </span>
             <span>Смотреть трейлер</span>
-          </button>
-
-          <button onClick={openDialog} type="button">
-            <span aria-hidden="true" className={styles.actionFrame}>
-              <span className={styles.plus}>+</span>
-            </span>
-            <span>Получить премьеру</span>
           </button>
         </div>
       </div>

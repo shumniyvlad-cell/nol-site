@@ -28,7 +28,12 @@
 html {
   background: var(--black);
   scroll-behavior: smooth;
-  scrollbar-color: var(--muted-dark) var(--black);
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 body {

@@ -162,6 +162,7 @@
   .final,
   .frame {
     min-height: 900px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
   }
 
   .scene {
@@ -176,21 +177,21 @@
   }
 
   .redThreshold {
-    top: 128px;
+    top: 166px;
     right: 28px;
     left: auto;
     width: 20px;
   }
 
   .copy {
-    top: 150px;
-    left: 20px;
-    width: calc(100% - 40px);
+    top: 216px;
+    left: 30px;
+    width: calc(100% - 50px);
   }
 
   .copy h2 {
     max-width: 340px;
-    font-size: clamp(43px, 12.5vw, 50px);
+    font-size: clamp(42px, 12vw, 48px);
     line-height: 1.02;
   }
 
@@ -202,13 +203,31 @@
 
   .actions {
     width: 100%;
-    margin-top: 64px;
+    gap: 8px;
+    margin-top: 48px;
   }
 
   .actions a {
     grid-template-columns: auto 1fr 26px;
+    min-height: 56px;
     gap: 12px;
     font-size: 14px;
+  }
+
+  .actions a:last-child {
+    color: rgba(17, 17, 17, 0.72);
+  }
+
+  .actions a:first-child {
+    min-height: 64px;
+    border-top: 1px solid rgba(17, 17, 17, 0.5);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.5);
+    font-size: 16px;
+    font-weight: 650;
+  }
+
+  .actions a:first-child .actionRule {
+    opacity: 0.8;
   }
 
   .note {

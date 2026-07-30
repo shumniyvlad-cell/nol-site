@@ -354,8 +354,8 @@
 
   .content {
     display: block;
-    padding-top: clamp(300px, 39svh, 344px);
-    padding-bottom: 112px;
+    padding-top: clamp(230px, 28.5svh, 248px);
+    padding-bottom: max(36px, env(safe-area-inset-bottom));
   }
 
   .title {
@@ -373,17 +373,17 @@
   }
 
   .details {
-    margin-top: 28px;
+    margin-top: 32px;
   }
 
   .summary {
     max-width: 360px;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.5;
   }
 
   .actions {
-    margin-top: 22px;
+    margin-top: 24px;
   }
 
   .action,
@@ -405,8 +405,7 @@
   }
 
   .nextCue {
-    min-height: 88px;
-    padding-top: 18px;
+    display: none;
   }
 
   .sectionIndex {
@@ -420,17 +419,17 @@
   }
 
   .horizon {
-    top: 31%;
+    top: 23.9%;
   }
 }
 
 @media (max-width: 360px) {
   .content {
-    padding-top: 288px;
+    padding-top: 224px;
   }
 
   .title {
-    font-size: 42px;
+    font-size: 39px;
   }
 
   .summary {

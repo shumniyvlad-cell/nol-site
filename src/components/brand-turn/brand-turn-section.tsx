@@ -37,9 +37,11 @@ export function BrandTurnSection() {
 
         <div className={styles.rightCopy}>
           <h3>
-            Ноль —
-            <br />
-            это не конец.
+            <span className={styles.mainStatement}>
+              Ноль —
+              <br />
+              это не конец.
+            </span>
             <br />
             <span className={styles.statementBreak}>
               Это точка,

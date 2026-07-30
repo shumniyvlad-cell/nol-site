@@ -211,37 +211,37 @@ function PortalAssembly({ assembleOnLoad }: Pick<ZeroPortalSceneProps, "assemble
       1.6,
       delta,
     );
-    const breath = 1 + Math.sin(elapsed * 0.42) * 0.006;
+    const breath = 0.9 + Math.sin(elapsed * 0.42) * 0.0054;
     group.scale.setScalar(breath);
   });
 
   return (
-    <group position={[2.15, 0.08, 0]} ref={groupRef}>
+    <group position={[2.52, 0.08, 0]} ref={groupRef}>
       <PortalCloud
         assembleOnLoad={assembleOnLoad}
         data={portalData}
-        opacity={0.82}
-        pointSize={0.043}
+        opacity={0.68}
+        pointSize={0.041}
       />
       <PortalCloud
         assembleOnLoad={assembleOnLoad}
         data={haloData}
-        opacity={0.24}
-        pointSize={0.062}
+        opacity={0.16}
+        pointSize={0.058}
         scale={[1.08, 1.05, 1]}
       />
       <group position={[0, -2.34, 0]} scale={[1, -0.42, 1]}>
         <PortalCloud
           assembleOnLoad={assembleOnLoad}
           data={portalData}
-          opacity={0.17}
+          opacity={0.12}
           pointSize={0.047}
         />
       </group>
       <PortalCloud
         assembleOnLoad={assembleOnLoad}
         data={mistData}
-        opacity={0.18}
+        opacity={0.13}
         pointSize={0.054}
       />
     </group>

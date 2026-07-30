@@ -103,11 +103,12 @@
 }
 
 .activeCopy p {
-  max-width: 310px;
+  max-width: 350px;
   margin: 20px 0 0;
-  font-size: clamp(15px, 1.1vw, 18px);
-  font-weight: 500;
-  line-height: 1.48;
+  color: rgba(10, 10, 10, 0.88);
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: 540;
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
@@ -121,7 +122,7 @@
 
 .stageItem {
   position: absolute;
-  bottom: 360px;
+  bottom: 270px;
   transform: translateX(-50%);
 }
 
@@ -395,60 +396,100 @@
   }
 
   .intro h2 {
-    font-size: clamp(48px, 8.4vw, 66px);
+    font-size: clamp(43px, 7.2vw, 54px);
+    line-height: 0.96;
   }
 
   .activeStage {
-    top: 30.5%;
+    top: 35%;
     right: var(--page-gutter);
-    left: auto;
-    grid-template-columns: auto minmax(190px, 260px);
+    left: 28%;
+    display: block;
+    isolation: isolate;
   }
 
   .activeNumber {
-    font-size: 150px;
+    display: block;
+    font-size: 118px;
+    line-height: 0.72;
   }
 
   .activeCopy {
-    margin-left: 12px;
+    position: relative;
+    max-width: 390px;
+    margin: 18px 0 0;
+    padding: 18px 18px 20px;
     transform: none;
   }
 
+  .activeCopy::before {
+    position: absolute;
+    inset: -54px -78px -46px;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse 100% 86% at 38% 52%,
+      rgba(242, 242, 239, 0.91) 0%,
+      rgba(242, 242, 239, 0.72) 38%,
+      rgba(242, 242, 239, 0.22) 64%,
+      transparent 100%
+    );
+    content: "";
+    filter: blur(7px);
+    -webkit-mask-image: radial-gradient(
+      ellipse 100% 90% at 38% 52%,
+      #000 24%,
+      rgba(0, 0, 0, 0.66) 52%,
+      transparent 82%
+    );
+    mask-image: radial-gradient(
+      ellipse 100% 90% at 38% 52%,
+      #000 24%,
+      rgba(0, 0, 0, 0.66) 52%,
+      transparent 82%
+    );
+  }
+
   .activeCopy h3 {
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .activeCopy p {
-    margin-top: 14px;
-    font-size: 15px;
+    max-width: 390px;
+    margin-top: 16px;
+    color: rgba(10, 10, 10, 0.92);
+    font-size: 17px;
+    font-weight: 480;
+    line-height: 1.5;
   }
 
   .stageMap {
     top: auto;
     right: var(--page-gutter);
-    bottom: 108px;
+    bottom: 92px;
     left: var(--page-gutter);
     display: grid;
-    height: 220px;
-    grid-template-rows: repeat(5, 1fr);
-    border-left: 1px solid rgba(247, 247, 245, 0.2);
+    height: 48px;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid rgba(247, 247, 245, 0.2);
   }
 
   .stageItem {
     position: relative;
     bottom: auto;
     left: auto;
-    display: flex;
-    align-items: center;
+    display: block;
     transform: none;
   }
 
   .stageItem button {
+    position: relative;
+    display: grid;
     width: 100%;
     min-width: 0;
-    grid-template-columns: 44px 1fr;
-    align-items: baseline;
-    padding-left: 20px;
+    min-height: 48px;
+    place-items: center;
+    padding: 0;
+    text-align: center;
   }
 
   .currentStage {
@@ -458,21 +499,27 @@
 
   .currentStage::before {
     position: absolute;
-    left: -4px;
+    top: -4px;
+    left: 50%;
     width: 7px;
     height: 7px;
     border-radius: 50%;
     background: var(--accent-red);
     content: "";
+    transform: translateX(-50%);
   }
 
   .route {
     display: none;
   }
 
+  .stageItem button strong {
+    display: none;
+  }
+
   .controls {
     right: var(--page-gutter);
-    bottom: 36px;
+    bottom: max(20px, env(safe-area-inset-bottom));
     justify-content: space-between;
     gap: 0;
   }
@@ -507,58 +554,56 @@
   }
 
   .intro {
-    top: 82px;
+    top: 80px;
   }
 
   .intro h2 {
-    font-size: 45px;
+    max-width: 330px;
+    font-size: 39px;
   }
 
   .activeStage {
-    top: 31.5%;
-    right: 12px;
-    grid-template-columns: auto 178px;
+    top: 35%;
+    right: 20px;
+    left: 24%;
   }
 
   .activeNumber {
-    font-size: 108px;
+    font-size: 86px;
   }
 
   .activeCopy h3 {
-    font-size: 30px;
+    font-size: 33px;
   }
 
   .activeCopy p {
-    margin-top: 12px;
-    font-size: 13px;
-    line-height: 1.42;
+    max-width: 330px;
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .stageMap {
-    bottom: 102px;
-    height: 210px;
+    bottom: 84px;
+    height: 46px;
   }
 
   .stageItem button {
-    grid-template-columns: 38px 1fr;
-    padding-left: 16px;
+    min-height: 46px;
   }
 
   .stageItem button span {
-    font-size: 11px;
-  }
-
-  .stageItem button strong {
-    font-size: 13px;
+    font-size: 10px;
   }
 
   .controls {
-    bottom: max(26px, env(safe-area-inset-bottom));
+    bottom: max(18px, env(safe-area-inset-bottom));
   }
 
   .controls button {
     gap: 8px;
-    font-size: 12px;
+    min-height: 48px;
+    font-size: 13px;
   }
 
   .controls svg {
@@ -569,20 +614,20 @@
 
 @media (max-width: 370px) {
   .activeStage {
-    right: 14px;
-    grid-template-columns: auto 155px;
+    right: 20px;
+    left: 23%;
   }
 
   .activeNumber {
-    font-size: 100px;
+    font-size: 82px;
   }
 
   .activeCopy h3 {
-    font-size: 26px;
+    font-size: 32px;
   }
 
   .activeCopy p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 

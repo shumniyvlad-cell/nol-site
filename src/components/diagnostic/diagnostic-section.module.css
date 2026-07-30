@@ -48,8 +48,8 @@
   top: clamp(152px, 15.5vh, 170px);
   left: -28px;
   z-index: 0;
-  color: rgba(10, 10, 10, 0.105);
-  font-size: clamp(430px, 42vw, 650px);
+  color: rgba(10, 10, 10, 0.058);
+  font-size: clamp(390px, 38vw, 590px);
   font-weight: 500;
   letter-spacing: -0.11em;
   line-height: 0.72;
@@ -101,8 +101,8 @@
 }
 
 .question {
-  grid-column: 4 / span 8;
-  max-width: 920px;
+  grid-column: 3 / span 9;
+  max-width: 1020px;
   margin: 0;
   font-size: clamp(50px, 4.2vw, 64px);
   font-weight: 520;
@@ -112,13 +112,13 @@
 }
 
 .options {
-  grid-column: 6 / -1;
-  margin-top: 28px;
+  grid-column: 5 / -1;
+  margin-top: 32px;
   border-top: 1px solid rgba(10, 10, 10, 0.6);
 }
 
 .option {
-  min-height: 74px;
+  min-height: 78px;
   border-bottom: 1px solid rgba(10, 10, 10, 0.5);
 }
 
@@ -132,7 +132,7 @@
 
 .option label {
   display: flex;
-  min-height: 74px;
+  min-height: 78px;
   align-items: center;
   padding: 14px 24px;
   cursor: pointer;
@@ -147,8 +147,8 @@
 }
 
 .option input:focus-visible + label {
-  outline: 2px solid var(--accent-red);
-  outline-offset: -2px;
+  outline: 1px dotted rgba(10, 10, 10, 0.68);
+  outline-offset: -4px;
 }
 
 .optionDot {
@@ -281,12 +281,12 @@
 
 @media (max-width: 1199px) {
   .question {
-    grid-column: 4 / -1;
+    grid-column: 3 / -1;
     font-size: clamp(46px, 5vw, 60px);
   }
 
   .options {
-    grid-column: 5 / -1;
+    grid-column: 4 / -1;
   }
 }
 
@@ -344,7 +344,7 @@
   .diagnostic,
   .frame,
   .form {
-    min-height: max(844px, 100svh);
+    min-height: max(860px, 100svh);
   }
 
   .frame {
@@ -352,7 +352,7 @@
   }
 
   .identity {
-    top: 84px;
+    top: 78px;
   }
 
   .stepMeta {
@@ -360,20 +360,20 @@
   }
 
   .stepNumber {
-    top: 126px;
-    left: -24px;
-    font-size: 300px;
+    top: 124px;
+    left: -8px;
+    font-size: 190px;
     letter-spacing: -0.12em;
   }
 
   .stepDots {
-    top: 56px;
-    right: 0;
-    gap: 27px;
+    top: 52px;
+    right: 8px;
+    gap: 25px;
   }
 
   .form {
-    padding-top: 330px;
+    padding-top: 238px;
   }
 
   .form fieldset {
@@ -382,23 +382,23 @@
 
   .question {
     width: 100%;
-    font-size: clamp(38px, 11vw, 46px);
-    line-height: 1.05;
+    font-size: clamp(36px, 10.4vw, 42px);
+    line-height: 1.03;
   }
 
   .options {
     width: 100%;
-    margin-top: 28px;
+    margin-top: 20px;
   }
 
   .option,
   .option label {
-    min-height: 66px;
+    min-height: 70px;
   }
 
   .option label {
-    padding: 10px 8px;
-    font-size: 17px;
+    padding: 12px 8px;
+    font-size: 16px;
   }
 
   .option input:checked + label .optionDot {
@@ -410,16 +410,16 @@
   .privacy {
     align-self: flex-start;
     max-width: 270px;
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 9px;
   }
 
   .actions {
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   .actions button {
-    min-height: 48px;
+    min-height: 54px;
     font-size: 15px;
   }
 
@@ -441,5 +441,28 @@
   .complete,
   .complete .frame {
     min-height: 1380px;
+  }
+}
+
+@media (max-width: 370px) {
+  .stepNumber {
+    font-size: 180px;
+  }
+
+  .form {
+    padding-top: 214px;
+  }
+
+  .question {
+    font-size: 36px;
+  }
+
+  .option,
+  .option label {
+    min-height: 68px;
+  }
+
+  .option label {
+    font-size: 15px;
   }
 }
