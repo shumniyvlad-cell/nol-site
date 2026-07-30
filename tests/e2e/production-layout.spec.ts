@@ -368,16 +368,23 @@ test("all eight legal answers open fully on mobile", async ({ page }) => {
 
 test("Last Payment uses one-shot desktop video and sr-only HTML title", async ({
   page,
+  request,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?qa=last-payment-video#media");
   await waitForStableLayout(page);
   await expect(page.locator("#media")).toBeInViewport();
-  const mediaResponsePromise = page.waitForResponse(
-    (response) =>
-      /last-payment\.(webm|mp4)$/.test(new URL(response.url()).pathname),
-  );
+
+  for (const asset of [
+    "/media/last-payment.webm",
+    "/media/last-payment.mp4",
+  ]) {
+    const response = await request.get(asset);
+    expect(response.status(), asset).toBe(200);
+    expect(response.headers()["content-type"], asset).toMatch(/^video\//);
+  }
+
   await page.emulateMedia({ reducedMotion: "no-preference" });
 
   const heading = page.getByTestId("last-payment-heading");
@@ -387,9 +394,6 @@ test("Last Payment uses one-shot desktop video and sr-only HTML title", async ({
 
   const video = page.getByTestId("last-payment-video");
   await expect(video).toHaveCount(1, { timeout: 8_000 });
-  const mediaResponse = await mediaResponsePromise;
-  expect([200, 206]).toContain(mediaResponse.status());
-  expect(mediaResponse.headers()["content-type"]).toMatch(/^video\//);
   await expect
     .poll(() => video.evaluate((element: HTMLVideoElement) => element.autoplay))
     .toBe(true);

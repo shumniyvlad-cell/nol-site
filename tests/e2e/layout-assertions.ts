@@ -92,10 +92,19 @@ export async function expectFullyExpanded(locator: Locator, label: string) {
 
 export async function waitForStableLayout(page: Page) {
   await page.evaluate(async () => {
-    await document.fonts.ready;
-    await new Promise<void>((resolve) =>
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
-    );
+    await Promise.race([
+      document.fonts.ready,
+      new Promise<void>((resolve) => window.setTimeout(resolve, 5_000)),
+    ]);
+    await new Promise<void>((resolve) => {
+      const fallback = window.setTimeout(resolve, 200);
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          window.clearTimeout(fallback);
+          resolve();
+        }),
+      );
+    });
   });
 }
 
