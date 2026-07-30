@@ -43,9 +43,9 @@
 .projection {
   position: absolute;
   top: clamp(146px, 16vh, 176px);
-  right: max(var(--page-gutter), calc((100% - var(--page-max)) / 2));
-  left: calc(47% + 8px);
-  width: auto;
+  right: auto;
+  left: calc(42% + 2px);
+  width: min(730px, calc(56.5% - 92px));
   color: rgba(173, 192, 202, 0.64);
   font-family: var(--font-plex-mono), monospace;
   filter: blur(0.24px) contrast(0.92);
@@ -55,10 +55,10 @@
   transform-style: preserve-3d;
   -webkit-mask-image:
     radial-gradient(ellipse 105% 95% at 46% 45%, #000 42%, rgba(0, 0, 0, 0.7) 74%, transparent 112%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 20% 88%, rgba(0, 0, 0, 0.62));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 16% 94%, rgba(0, 0, 0, 0.62));
   mask-image:
     radial-gradient(ellipse 105% 95% at 46% 45%, #000 42%, rgba(0, 0, 0, 0.7) 74%, transparent 112%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 20% 88%, rgba(0, 0, 0, 0.62));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82), #000 16% 94%, rgba(0, 0, 0, 0.62));
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
   text-shadow:
@@ -180,9 +180,9 @@
 @media (max-width: 1199px) {
   .projection {
     top: 150px;
-    right: 32px;
-    left: 48%;
-    width: auto;
+    right: auto;
+    left: 42%;
+    width: calc(56.5% - 54px);
   }
 
   .title {
