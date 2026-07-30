@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
-  height: var(--header-height);
+  height: calc(var(--header-height) + var(--safe-top));
   color: var(--white);
   transition:
     background-color 360ms var(--ease-standard),
@@ -107,6 +107,7 @@
   width: min(100%, calc(var(--page-max) + (2 * var(--page-gutter))));
   height: 100%;
   margin: 0 auto;
+  padding-top: var(--safe-top);
   padding-inline: var(--page-gutter);
 }
 
@@ -254,20 +255,46 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  padding: calc(var(--header-height) + 56px) var(--page-gutter) 32px;
-  background: var(--black);
+  height: var(--visual-viewport-height, 100dvh);
+  overflow: hidden;
   animation: menu-in 360ms var(--ease-out) both;
 }
 
-.mobileMenu nav {
+.menuBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--black);
+  cursor: default;
+}
+
+.mobileMenuContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr) auto;
+  padding:
+    calc(var(--header-height) + var(--safe-top) + 48px)
+    var(--page-gutter)
+    max(32px, var(--safe-bottom));
+  pointer-events: none;
+}
+
+.mobileMenuContent nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
 }
 
-.mobileMenu nav a {
+.mobileMenuContent nav a {
   display: grid;
   grid-template-columns: 44px 1fr;
   align-items: baseline;
@@ -279,7 +306,7 @@
   line-height: 1.06;
 }
 
-.mobileMenu nav a:last-child {
+.mobileMenuContent nav a:last-child {
   border-bottom: 1px solid var(--border-dark);
 }
 
@@ -296,6 +323,7 @@
   min-height: 56px;
   border-bottom: 1px solid var(--white);
   font-weight: 600;
+  pointer-events: auto;
 }
 
 @keyframes menu-in {
@@ -317,10 +345,6 @@
 }
 
 @media (max-width: 899px) {
-  .header {
-    height: calc(var(--header-height) + env(safe-area-inset-top));
-  }
-
   .split:not(.menuActive) {
     border-bottom-color: var(--border-light);
     background: rgba(239, 239, 237, 0.9);
@@ -333,7 +357,6 @@
 
   .inner {
     grid-template-columns: 1fr auto;
-    padding-top: env(safe-area-inset-top);
   }
 
   .navigation,
@@ -350,10 +373,7 @@
     justify-self: end;
   }
 
-  .mobileMenu {
-    padding-top: calc(
-      var(--header-height) + env(safe-area-inset-top) + 48px
-    );
-    padding-bottom: max(32px, env(safe-area-inset-bottom));
+  .mobileMenuContent {
+    padding-bottom: max(32px, var(--safe-bottom));
   }
 }

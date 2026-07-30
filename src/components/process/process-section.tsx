@@ -36,6 +36,7 @@ const stagePositions = [11.5, 31.8, 51.5, 78.3, 93.5] as const;
 
 export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const isScrollDrivenRef = useRef(false);
   const [activeStage, setActiveStage] = useState(0);
   const stage = stages[activeStage];
   const stageNumber = String(activeStage + 1).padStart(2, "0");
@@ -48,11 +49,12 @@ export function ProcessSection() {
 
   useEffect(() => {
     let animationFrame = 0;
+    const desktop = window.matchMedia("(min-width: 900px)");
 
     const updateStageFromScroll = () => {
       animationFrame = 0;
       const section = sectionRef.current;
-      if (!section) {
+      if (!section || !isScrollDrivenRef.current) {
         return;
       }
 
@@ -66,12 +68,19 @@ export function ProcessSection() {
     };
 
     const requestUpdate = () => {
-      if (animationFrame === 0) {
+      if (isScrollDrivenRef.current && animationFrame === 0) {
         animationFrame = window.requestAnimationFrame(updateStageFromScroll);
       }
     };
 
-    updateStageFromScroll();
+    const updateMode = () => {
+      isScrollDrivenRef.current = desktop.matches;
+      setActiveStage(0);
+      requestUpdate();
+    };
+
+    updateMode();
+    desktop.addEventListener("change", updateMode);
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
 
@@ -79,6 +88,7 @@ export function ProcessSection() {
       if (animationFrame !== 0) {
         window.cancelAnimationFrame(animationFrame);
       }
+      desktop.removeEventListener("change", updateMode);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
@@ -94,6 +104,12 @@ export function ProcessSection() {
       Math.max(nextStage, 0),
       stages.length - 1,
     );
+
+    if (!isScrollDrivenRef.current) {
+      setActiveStage(clampedStage);
+      return;
+    }
+
     const travel = Math.max(section.offsetHeight - window.innerHeight, 0);
     const sectionTop = window.scrollY + section.getBoundingClientRect().top;
     const targetTop =
@@ -116,6 +132,7 @@ export function ProcessSection() {
       aria-labelledby="process-title"
       className={styles.process}
       data-active-stage={stageNumber}
+      data-header-theme="dark"
       id="process"
       ref={sectionRef}
     >
@@ -124,7 +141,7 @@ export function ProcessSection() {
         <div aria-hidden="true" className={styles.vignette} />
 
         <div className={styles.frame}>
-          <div className={styles.intro}>
+          <div className={styles.intro} data-testid="process-intro">
             <p>КАК ПРОХОДИТ ПУТЬ</p>
             <h2 id="process-title">
               Путь —
@@ -134,17 +151,29 @@ export function ProcessSection() {
             </h2>
           </div>
 
-          <div aria-live="polite" className={styles.activeStage}>
-            <span aria-hidden="true" className={styles.activeNumber}>
+          <div
+            aria-live="polite"
+            className={styles.activeStage}
+            data-testid="process-active-stage"
+          >
+            <span
+              aria-hidden="true"
+              className={styles.activeNumber}
+              data-testid="process-number"
+            >
               {stageNumber}
             </span>
             <div className={styles.activeCopy} key={stageNumber}>
-              <h3>{stage.title}</h3>
-              <p>{stage.body}</p>
+              <h3 data-testid="process-stage-title">{stage.title}</h3>
+              <p data-testid="process-stage-body">{stage.body}</p>
             </div>
           </div>
 
-          <ol aria-label="Этапы сопровождения" className={styles.stageMap}>
+          <ol
+            aria-label="Этапы сопровождения"
+            className={styles.stageMap}
+            data-testid="process-stage-map"
+          >
             {stages.map((item, index) => (
               <li
                 className={`${styles.stageItem} ${styles[`stage${index + 1}`]} ${
@@ -168,7 +197,7 @@ export function ProcessSection() {
             <span />
           </div>
 
-          <div className={styles.controls}>
+          <div className={styles.controls} data-testid="process-controls">
             <button
               disabled={activeStage === 0}
               onClick={showPrevious}
@@ -188,9 +217,7 @@ export function ProcessSection() {
           </div>
 
           <p className={styles.termNote}>
-            Средний срок зависит
-            <br />
-            от состава долга и суда.
+            Средний срок зависит от состава долга и суда.
           </p>
         </div>
       </div>

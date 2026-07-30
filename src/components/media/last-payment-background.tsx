@@ -8,9 +8,11 @@ const visibilityThreshold = 0.38;
 export function LastPaymentBackground() {
   const stageRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isInViewportRef = useRef(false);
   const [canLoadVideo, setCanLoadVideo] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [hasEnded, setHasEnded] = useState(false);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 769px)");
@@ -36,6 +38,9 @@ export function LastPaymentBackground() {
 
       if (!desktop.matches || reducedMotion.matches) {
         setCanLoadVideo(false);
+        setIsVideoReady(false);
+        setHasStarted(false);
+        setHasEnded(false);
         return;
       }
 
@@ -65,16 +70,38 @@ export function LastPaymentBackground() {
 
   useEffect(() => {
     const stage = stageRef.current;
-    const video = videoRef.current;
-    if (!stage || !video || !canLoadVideo) {
+    if (!stage) {
       return;
     }
 
-    video.pause();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const nextIsVisible =
+          entry.isIntersecting &&
+          entry.intersectionRatio >= visibilityThreshold;
+        setIsInViewport((current) =>
+          current === nextIsVisible ? current : nextIsVisible,
+        );
+      },
+      { threshold: [0, visibilityThreshold, 0.75] },
+    );
+
+    observer.observe(stage);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !canLoadVideo) {
+      return;
+    }
 
     const syncPlayback = () => {
       const shouldPlay =
-        isInViewportRef.current &&
+        isInViewport &&
+        isVideoReady &&
+        !hasEnded &&
         document.visibilityState === "visible" &&
         !video.ended;
 
@@ -87,36 +114,25 @@ export function LastPaymentBackground() {
       }
     };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isInViewportRef.current =
-          entry.isIntersecting &&
-          entry.intersectionRatio >= visibilityThreshold;
-        syncPlayback();
-      },
-      { threshold: [0, visibilityThreshold, 0.75] },
-    );
-
     const handleVisibilityChange = () => syncPlayback();
 
-    observer.observe(stage);
+    syncPlayback();
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      observer.disconnect();
       document.removeEventListener(
         "visibilitychange",
         handleVisibilityChange,
       );
       video.pause();
-      isInViewportRef.current = false;
     };
-  }, [canLoadVideo]);
+  }, [canLoadVideo, hasEnded, isInViewport, isVideoReady]);
 
   return (
     <div
       aria-hidden="true"
       className={styles.videoStage}
+      data-testid="last-payment-stage"
       ref={stageRef}
     >
       <picture className={styles.videoPoster}>
@@ -138,13 +154,17 @@ export function LastPaymentBackground() {
       {canLoadVideo ? (
         <video
           aria-hidden="true"
-          autoPlay
+          autoPlay={isInViewport && !hasEnded}
           className={`${styles.backgroundVideo} ${
             hasStarted ? styles.backgroundVideoReady : ""
           }`}
           controls={false}
+          data-testid="last-payment-video"
           disablePictureInPicture
           muted
+          onCanPlay={() => setIsVideoReady(true)}
+          onEnded={() => setHasEnded(true)}
+          onLoadedData={() => setIsVideoReady(true)}
           onPlaying={() => setHasStarted(true)}
           playsInline
           poster="/media/last-payment-poster.webp"

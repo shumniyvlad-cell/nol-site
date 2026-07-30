@@ -50,7 +50,7 @@ export function MediaSection() {
 
         <p className={styles.format}>БРЕНД-МЕДИА / ДОКУМЕНТАЛЬНЫЙ СЕРИАЛ</p>
 
-        <h2 className="sr-only" id="media-title">
+        <h2 className="sr-only" data-testid="last-payment-heading" id="media-title">
           Последний платёж
         </h2>
 
@@ -62,7 +62,7 @@ export function MediaSection() {
           </p>
         </div>
 
-        <div className={styles.actions}>
+        <div className={styles.actions} data-testid="last-payment-actions">
           <button onClick={openDialog} type="button">
             <span aria-hidden="true" className={styles.actionFrame}>
               <span className={styles.playRing}>
@@ -70,6 +70,12 @@ export function MediaSection() {
               </span>
             </span>
             <span>Смотреть трейлер</span>
+          </button>
+          <button onClick={openDialog} type="button">
+            <span aria-hidden="true" className={styles.actionFrame}>
+              <span className={styles.plus}>+</span>
+            </span>
+            <span>Получить премьеру</span>
           </button>
         </div>
       </div>

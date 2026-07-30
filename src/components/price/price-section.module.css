@@ -5,7 +5,6 @@
   isolation: isolate;
   background: var(--surface-light);
   color: #0a0a0a;
-  scroll-margin-top: 0;
 }
 
 .paperNoise {

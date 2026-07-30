@@ -29,25 +29,22 @@ test("diagnostic, legal and media controls are functional", async ({
 }) => {
   await page.goto("/#diagnostic");
 
-  await expect(
-    page.getByRole("radio", {
-      name: "Есть исполнительные производства",
-    }),
-  ).toBeChecked();
+  await expect(page.getByTestId("diagnostic-meta")).toContainText("01 ИЗ 07");
+  await expect(page.getByRole("radio").first()).not.toBeChecked();
+  await page.getByText("До 300 000 ₽", { exact: true }).click();
   await page.getByRole("button", { name: "Продолжить" }).click();
   await expect(
-    page.getByRole("region", { name: "Есть ли официальный доход?" }),
+    page.getByRole("region", { name: "Есть ли просрочки?" }),
   ).toBeVisible();
 
   await page.goto("/#legal");
-  await page
-    .getByRole("button", { name: "02 Какие долги могут не списать?" })
-    .click();
+  await page.getByTestId("legal-desktop-questions").getByRole("button").nth(1).click();
   await expect(
-    page.getByRole("heading", {
-      name: "Какие долги могут не списать?",
-    }),
+    page.getByTestId("legal-active-question"),
   ).toBeVisible();
+  await expect(page.getByTestId("legal-active-question")).toContainText(
+    "Какие долги могут не списать?",
+  );
 
   await page.goto("/#media");
   await page.getByRole("button", { name: "Смотреть трейлер" }).click();
@@ -61,7 +58,7 @@ test("diagnostic, legal and media controls are functional", async ({
 });
 
 test("desktop portal uses the live WebGL layer", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop");
+  test.skip(testInfo.project.name !== "chromium");
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
 
@@ -84,8 +81,8 @@ test("desktop portal uses the live WebGL layer", async ({ page }, testInfo) => {
   expect(firstFrame.equals(secondFrame)).toBe(false);
 });
 
-test("mobile layout has no horizontal overflow", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile");
+test("mobile layout has no horizontal overflow", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
 

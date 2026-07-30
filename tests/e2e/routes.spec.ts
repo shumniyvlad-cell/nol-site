@@ -16,7 +16,7 @@ const routes = [
 ] as const;
 
 test("all required routes render", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop");
+  test.skip(testInfo.project.name !== "chromium");
 
   for (const route of routes) {
     const response = await page.goto(route);
@@ -26,7 +26,7 @@ test("all required routes render", async ({ page }, testInfo) => {
 });
 
 test("unknown route uses the branded 404", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop");
+  test.skip(testInfo.project.name !== "chromium");
   const response = await page.goto(
     isStaticPreview ? "/404.html" : "/route-that-does-not-exist",
   );
@@ -39,7 +39,7 @@ test("unknown route uses the branded 404", async ({ page }, testInfo) => {
 test("lead endpoint rejects invalid payloads", async ({
   request,
 }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop");
+  test.skip(testInfo.project.name !== "chromium");
   test.skip(isStaticPreview, "Static preview intentionally has no lead API.");
   const response = await request.post("/api/leads", {
     data: { type: "diagnostic" },

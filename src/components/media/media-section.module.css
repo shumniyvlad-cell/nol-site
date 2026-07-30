@@ -80,6 +80,21 @@
     );
 }
 
+.projectorWash::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #050505 0 78%, transparent 100%) left 23% /
+      34% 12% no-repeat,
+    linear-gradient(90deg, #050505 0 82%, transparent 100%) left 40% /
+      27% 23% no-repeat,
+    linear-gradient(90deg, #050505 0 84%, transparent 100%) left 67% /
+      20% 25% no-repeat,
+    linear-gradient(90deg, #050505 0 86%, transparent 100%) left bottom /
+      20% 18% no-repeat;
+  content: "";
+}
+
 .format {
   position: absolute;
   top: 25.8%;
@@ -501,11 +516,22 @@
 @media (max-width: 1099px) {
   .media {
     display: block;
-    min-height: calc(max(768px, 100svh) + 340px);
+    min-height: calc(
+      max(
+          700px,
+          calc(
+            100svh - var(--header-height) - var(--safe-top) - 12px
+          )
+        ) +
+        340px
+    );
   }
 
   .poster {
-    min-height: max(768px, 100svh);
+    min-height: max(
+      700px,
+      calc(100svh - var(--header-height) - var(--safe-top) - 12px)
+    );
   }
 
   .videoPoster img,
@@ -553,11 +579,22 @@
 
 @media (max-width: 599px) {
   .media {
-    min-height: calc(max(800px, 100svh) + 420px);
+    min-height: calc(
+      max(
+          720px,
+          calc(
+            100svh - var(--header-height) - var(--safe-top) - 12px
+          )
+        ) +
+        420px
+    );
   }
 
   .poster {
-    min-height: max(800px, 100svh);
+    min-height: max(
+      720px,
+      calc(100svh - var(--header-height) - var(--safe-top) - 12px)
+    );
   }
 
   .videoPoster img,
@@ -578,6 +615,10 @@
         rgba(0, 0, 0, 0.08) 36%,
         transparent 58%
       );
+  }
+
+  .projectorWash::before {
+    display: none;
   }
 
   .format {

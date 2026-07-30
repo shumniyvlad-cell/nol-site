@@ -70,7 +70,6 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  interactiveWidget: "resizes-content",
   themeColor: "#050505",
   viewportFit: "cover",
 };
@@ -81,7 +80,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${manrope.variable} ${plexMono.variable}`}>
+    <html
+      lang="ru"
+      className={`${manrope.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: heroIntroStateScript }} />
       </head>

@@ -14,7 +14,12 @@
   --border-light: rgba(0, 0, 0, 0.12);
   --page-gutter: clamp(20px, 4vw, 72px);
   --page-max: 1440px;
-  --header-height: 72px;
+  --header-height-desktop: 72px;
+  --header-height-mobile: 64px;
+  --header-height: var(--header-height-desktop);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --visual-viewport-height: 100dvh;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -28,6 +33,9 @@
 html {
   background: var(--black);
   scroll-behavior: smooth;
+  scroll-padding-top: calc(
+    var(--header-height) + var(--safe-top) + 12px
+  );
   scrollbar-width: none;
 }
 
@@ -38,6 +46,7 @@ html::-webkit-scrollbar {
 
 body {
   min-width: 320px;
+  min-height: 100dvh;
   margin: 0;
   overflow-x: clip;
   background: var(--black);
@@ -126,9 +135,14 @@ button {
   border: 0;
 }
 
+@media (max-width: 899px) {
+  :root {
+    --header-height: var(--header-height-mobile);
+  }
+}
+
 @media (max-width: 599px) {
   :root {
-    --header-height: 64px;
     --page-gutter: 20px;
   }
 }

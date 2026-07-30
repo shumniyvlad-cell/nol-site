@@ -2,7 +2,8 @@
   position: relative;
   z-index: 4;
   min-height: 78px;
-  margin-top: -78px;
+  margin-top: 0;
+  background: var(--black);
   color: rgba(247, 247, 245, 0.58);
 }
 
@@ -92,7 +93,7 @@
 @media (max-width: 599px) {
   .footer {
     min-height: 186px;
-    margin-top: -186px;
+    margin-top: 0;
   }
 
   .footer::before {
@@ -113,7 +114,7 @@
     min-height: 186px;
     align-content: end;
     gap: 4px;
-    padding: 24px 20px max(18px, env(safe-area-inset-bottom));
+    padding: 24px 20px max(24px, var(--safe-bottom));
     font-size: 11px;
   }
 

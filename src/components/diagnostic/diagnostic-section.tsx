@@ -6,9 +6,7 @@ import { ArrowIcon } from "@/components/icons/arrow-icon";
 import { diagnosticQuestions as questions } from "@/content/diagnostic";
 import styles from "./diagnostic-section.module.css";
 
-const initialAnswers: Record<string, string> = {
-  arrears: "Есть исполнительные производства",
-};
+const initialAnswers: Record<string, string> = {};
 
 type DiagnosticSectionProps = {
   initialStep?: number;
@@ -16,7 +14,7 @@ type DiagnosticSectionProps = {
 };
 
 export function DiagnosticSection({
-  initialStep = 1,
+  initialStep = 0,
   initialAnswers: suppliedInitialAnswers = initialAnswers,
 }: DiagnosticSectionProps = {}) {
   const [step, setStep] = useState(initialStep);
@@ -114,13 +112,17 @@ export function DiagnosticSection({
       id="diagnostic"
     >
       <div className={styles.paperNoise} />
-      <div aria-hidden="true" className={styles.stepNumber}>
+      <div
+        aria-hidden="true"
+        className={styles.stepNumber}
+        data-testid="diagnostic-number"
+      >
         {visualStepLabel}
       </div>
 
       <div className={styles.frame}>
         <div className={styles.identity}>
-          <span className={styles.stepMeta}>
+          <span className={styles.stepMeta} data-testid="diagnostic-meta">
             ДИАГНОСТИКА / {visualStepLabel} ИЗ{" "}
             {String(questions.length).padStart(2, "0")}
           </span>
@@ -158,11 +160,15 @@ export function DiagnosticSection({
           >
             <fieldset aria-labelledby="diagnostic-title">
               <legend className="sr-only">{activeQuestion.question}</legend>
-              <h2 className={styles.question} id="diagnostic-title">
+              <h2
+                className={styles.question}
+                data-testid="diagnostic-question"
+                id="diagnostic-title"
+              >
                 {activeQuestion.question}
               </h2>
 
-              <div className={styles.options}>
+              <div className={styles.options} data-testid="diagnostic-options">
                 {activeQuestion.options.map((option, optionIndex) => {
                   const optionId = `${activeQuestion.id}-${optionIndex}`;
                   return (
@@ -189,7 +195,7 @@ export function DiagnosticSection({
               Ответы не сохраняются и не отправляются без вашего согласия.
             </p>
 
-            <div className={styles.actions}>
+            <div className={styles.actions} data-testid="diagnostic-actions">
               <button
                 disabled={!isHydrated || step === 0}
                 onClick={goBack}
