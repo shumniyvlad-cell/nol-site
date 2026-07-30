@@ -153,8 +153,8 @@
       url("/media/hero-portal-mobile.webp") type("image/webp")
     );
     background-position: right top;
-    background-size: 90% auto;
-    filter: brightness(0.84);
+    background-size: 82% auto;
+    filter: brightness(0.76);
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -177,7 +177,7 @@
 
 @media (max-width: 370px) {
   .fallback {
-    background-size: 88% auto;
+    background-size: 80% auto;
   }
 }
 

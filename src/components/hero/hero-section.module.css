@@ -349,12 +349,12 @@
 @media (max-width: 599px) {
   .hero,
   .content {
-    min-height: max(844px, 100svh);
+    min-height: max(880px, 100svh);
   }
 
   .content {
     display: block;
-    padding-top: clamp(230px, 28.5svh, 248px);
+    padding-top: clamp(206px, 25svh, 222px);
     padding-bottom: max(36px, env(safe-area-inset-bottom));
   }
 
@@ -373,7 +373,7 @@
   }
 
   .details {
-    margin-top: 32px;
+    margin-top: 40px;
   }
 
   .summary {
@@ -383,7 +383,8 @@
   }
 
   .actions {
-    margin-top: 24px;
+    margin-top: 30px;
+    gap: 12px;
   }
 
   .action,
@@ -399,7 +400,7 @@
   }
 
   .note {
-    margin-top: 18px;
+    margin-top: 24px;
     padding-right: 24px;
     font-size: 10px;
   }
@@ -419,13 +420,13 @@
   }
 
   .horizon {
-    top: 23.9%;
+    top: 22.5%;
   }
 }
 
 @media (max-width: 360px) {
   .content {
-    padding-top: 224px;
+    padding-top: 202px;
   }
 
   .title {

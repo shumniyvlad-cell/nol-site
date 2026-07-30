@@ -330,7 +330,7 @@
 @media (max-width: 599px) {
   .manifesto,
   .frame {
-    min-height: 1530px;
+    min-height: 1610px;
   }
 
   .registrationAxis {
@@ -369,7 +369,7 @@
 
   .manifestoStatement {
     max-width: 340px;
-    margin-top: 34px;
+    margin-top: 42px;
     font-family: var(--font-manrope), Arial, sans-serif;
     font-size: 18px;
     font-weight: 520;
@@ -379,7 +379,7 @@
   }
 
   .principles {
-    margin-top: 42px;
+    margin-top: 70px;
   }
 
   .principles ul {

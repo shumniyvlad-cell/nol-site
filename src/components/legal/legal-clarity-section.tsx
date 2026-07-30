@@ -12,18 +12,25 @@ const initialQuestionIndex = 3;
 
 export function LegalClaritySection() {
   const [activeIndex, setActiveIndex] = useState(initialQuestionIndex);
+  const [mobileOpenIndex, setMobileOpenIndex] = useState<number | null>(
+    initialQuestionIndex,
+  );
   const mobileQuestionRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const shouldScrollMobileRef = useRef(false);
   const activeQuestion = legalQuestions[activeIndex];
 
   useEffect(() => {
-    if (window.innerWidth >= 900 || !shouldScrollMobileRef.current) {
+    if (
+      window.innerWidth >= 900 ||
+      mobileOpenIndex === null ||
+      !shouldScrollMobileRef.current
+    ) {
       return;
     }
 
     shouldScrollMobileRef.current = false;
     const animationFrame = window.requestAnimationFrame(() => {
-      mobileQuestionRefs.current[activeIndex]?.scrollIntoView({
+      mobileQuestionRefs.current[mobileOpenIndex]?.scrollIntoView({
         block: "nearest",
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
@@ -32,11 +39,18 @@ export function LegalClaritySection() {
     });
 
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [activeIndex]);
+  }, [mobileOpenIndex]);
 
   const selectQuestion = (index: number) => {
-    shouldScrollMobileRef.current = window.innerWidth < 900;
+    if (window.innerWidth < 900) {
+      shouldScrollMobileRef.current = mobileOpenIndex !== index;
+      setActiveIndex(index);
+      setMobileOpenIndex((current) => (current === index ? null : index));
+      return;
+    }
+
     setActiveIndex(index);
+    setMobileOpenIndex(index);
   };
 
   return (
@@ -109,7 +123,7 @@ export function LegalClaritySection() {
         <p className={styles.mobileLabel}>ЮРИДИЧЕСКАЯ ЯСНОСТЬ / ВОПРОСЫ</p>
         <ol aria-label="Юридические вопросы">
           {legalQuestions.map((item, index) => {
-            const isActive = index === activeIndex;
+            const isActive = index === mobileOpenIndex;
 
             return (
               <li

@@ -345,10 +345,17 @@
 }
 
 @media (max-width: 899px) {
+  .scrolled:not(.menuActive) {
+    background: var(--black);
+    backdrop-filter: none;
+  }
+
+  .light:not(.menuActive),
   .split:not(.menuActive) {
     border-bottom-color: var(--border-light);
-    background: rgba(239, 239, 237, 0.9);
+    background: var(--surface-light);
     color: #0a0a0a;
+    backdrop-filter: none;
   }
 
   .split:not(.menuActive)::after {

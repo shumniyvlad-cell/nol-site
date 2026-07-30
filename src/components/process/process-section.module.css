@@ -73,9 +73,9 @@
 .activeStage {
   position: absolute;
   top: 36%;
-  left: 38.6%;
+  left: 37.4%;
   display: grid;
-  grid-template-columns: auto minmax(240px, 330px);
+  grid-template-columns: auto minmax(210px, 260px);
   align-items: center;
   color: #0a0a0a;
 }
@@ -88,25 +88,25 @@
 }
 
 .activeCopy {
-  margin-left: 60px;
+  margin-left: 34px;
   transform: translateY(58px);
   animation: stage-copy-in 420ms var(--ease-out) both;
 }
 
 .activeCopy h3 {
   margin: 0;
-  font-size: clamp(36px, 3vw, 48px);
+  font-size: clamp(35px, 2.7vw, 42px);
   font-weight: 550;
   letter-spacing: -0.055em;
   line-height: 1;
 }
 
 .activeCopy p {
-  max-width: 350px;
+  max-width: 238px;
   margin: 20px 0 0;
   color: rgba(10, 10, 10, 0.88);
   font-size: clamp(17px, 1.25vw, 20px);
-  font-weight: 540;
+  font-weight: 570;
   line-height: 1.5;
   text-wrap: pretty;
 }
@@ -148,11 +148,11 @@
 .stageItem button {
   display: grid;
   min-width: 148px;
-  gap: 8px;
+  gap: 13px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(247, 247, 245, 0.58);
+  color: rgba(247, 247, 245, 0.72);
   text-align: left;
   cursor: pointer;
   transition: color 180ms ease;
@@ -170,13 +170,22 @@
 }
 
 .stageItem button strong {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 540;
 }
 
 .currentStage {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.currentStage button span {
+  color: var(--accent-red);
+}
+
+.currentStage button strong {
+  color: var(--white);
+  font-weight: 650;
 }
 
 .route {
@@ -275,7 +284,7 @@
   }
 
   .activeStage {
-    left: 36%;
+    left: 35%;
   }
 
   .activeNumber {
@@ -283,11 +292,11 @@
   }
 
   .activeCopy {
-    margin-left: 38px;
+    margin-left: 26px;
   }
 
   .activeCopy h3 {
-    font-size: 42px;
+    font-size: 38px;
   }
 }
 
@@ -319,7 +328,7 @@
   }
 
   .activeCopy {
-    margin-left: 32px;
+    margin-left: 24px;
     transform: translateY(38px);
   }
 
@@ -363,7 +372,7 @@
   .process {
     height: auto;
     min-height: max(
-      704px,
+      900px,
       calc(100svh - var(--header-height) - var(--safe-top) - 12px)
     );
   }
@@ -374,7 +383,7 @@
     top: auto;
     height: auto;
     min-height: max(
-      704px,
+      900px,
       calc(100svh - var(--header-height) - var(--safe-top) - 12px)
     );
     overflow: clip;
@@ -382,8 +391,8 @@
 
   .scene {
     inset: 0 0 auto;
-    height: 56%;
-    background-position: 53% 38%;
+    height: 49%;
+    background-position: 53% 42%;
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -391,9 +400,9 @@
   .vignette {
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.12) 0%,
-      rgba(0, 0, 0, 0.14) 45%,
-      rgba(16, 17, 18, 0.92) 68%,
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0.24) 38%,
+      rgba(16, 17, 18, 0.94) 62%,
       #101112 100%
     );
   }
@@ -408,27 +417,30 @@
   }
 
   .intro h2 {
-    font-size: clamp(43px, 7.2vw, 54px);
-    line-height: 0.96;
+    max-width: 380px;
+    font-size: clamp(38px, 6.4vw, 48px);
+    line-height: 0.98;
   }
 
   .activeStage {
-    top: clamp(300px, 38svh, 390px);
+    top: clamp(314px, 37svh, 350px);
     right: var(--page-gutter);
     left: var(--page-gutter);
     display: grid;
-    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-columns: 78px minmax(0, 1fr);
     align-items: start;
-    gap: 20px;
-    min-height: 252px;
-    padding: 24px;
-    background: rgba(242, 242, 239, 0.94);
+    gap: 24px;
+    min-height: 320px;
+    padding: 30px 28px;
+    border: 1px solid rgba(10, 10, 10, 0.16);
+    background: rgba(244, 244, 241, 0.97);
     color: #0a0a0a;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
   }
 
   .activeNumber {
     display: block;
-    font-size: 82px;
+    font-size: 68px;
     letter-spacing: -0.1em;
     line-height: 0.8;
   }
@@ -446,7 +458,7 @@
   }
 
   .activeCopy h3 {
-    font-size: clamp(32px, 5vw, 40px);
+    font-size: clamp(30px, 4.8vw, 38px);
   }
 
   .activeCopy p {
@@ -461,7 +473,7 @@
   .stageMap {
     top: auto;
     right: var(--page-gutter);
-    bottom: 90px;
+    bottom: 92px;
     left: var(--page-gutter);
     display: grid;
     height: 48px;
@@ -542,7 +554,7 @@
 @media (max-width: 599px) {
   .process {
     min-height: max(
-      704px,
+      724px,
       calc(100svh - var(--header-height) - var(--safe-top) - 12px)
     );
   }
@@ -550,43 +562,43 @@
   .stickyFrame,
   .frame {
     min-height: max(
-      704px,
+      724px,
       calc(100svh - var(--header-height) - var(--safe-top) - 12px)
     );
   }
 
   .intro {
-    top: 80px;
+    top: 68px;
   }
 
   .intro h2 {
-    max-width: 330px;
-    font-size: 39px;
+    max-width: 280px;
+    font-size: 36px;
   }
 
   .activeStage {
-    top: clamp(292px, 37svh, 320px);
-    right: 20px;
-    left: 20px;
-    grid-template-columns: 68px minmax(0, 1fr);
-    gap: 14px;
-    min-height: 252px;
-    padding: 20px 18px;
+    top: clamp(232px, 29.5svh, 252px);
+    right: 16px;
+    left: 16px;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 16px;
+    min-height: 286px;
+    padding: 26px 22px;
   }
 
   .activeNumber {
-    font-size: 62px;
+    font-size: 58px;
   }
 
   .activeCopy h3 {
-    font-size: 30px;
+    font-size: 29px;
   }
 
   .activeCopy p {
     max-width: 330px;
     margin-top: 14px;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.52;
   }
 
   .stageMap {
@@ -603,7 +615,7 @@
   }
 
   .controls {
-    bottom: max(18px, env(safe-area-inset-bottom));
+    bottom: max(14px, env(safe-area-inset-bottom));
   }
 
   .controls button {
@@ -620,12 +632,14 @@
 
 @media (max-width: 370px) {
   .activeStage {
-    right: 20px;
-    left: 20px;
+    right: 14px;
+    left: 14px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    padding-inline: 18px;
   }
 
   .activeNumber {
-    font-size: 58px;
+    font-size: 54px;
   }
 
   .activeCopy h3 {

@@ -364,6 +364,12 @@ test("all eight legal answers open fully on mobile", async ({ page }) => {
     );
     await expectNoHorizontalOverflow(page);
   }
+
+  await questions.nth(7).click();
+  await expect(questions.nth(7)).toHaveAttribute("aria-expanded", "false");
+  await expect(
+    page.getByTestId("legal-mobile-response").filter({ visible: true }),
+  ).toHaveCount(0);
 });
 
 test("Last Payment uses one-shot desktop video and sr-only HTML title", async ({

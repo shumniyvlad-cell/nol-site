@@ -373,20 +373,20 @@
 @media (max-width: 599px) {
   .brandTurn,
   .frame {
-    min-height: 1400px;
+    min-height: 1760px;
   }
 
   .brandTurn {
     background: linear-gradient(
       180deg,
-      #111 0 74%,
-      var(--surface-light) 74%
+      #111 0 73%,
+      var(--surface-light) 73%
     );
   }
 
   .scene {
-    top: 352px;
-    bottom: 492px;
+    top: 360px;
+    bottom: 650px;
     background-position: 50% center;
     background-size: auto 100%;
   }
@@ -409,7 +409,7 @@
   }
 
   .rightCopy {
-    top: 900px;
+    top: 1080px;
     right: 0;
     left: 0;
     width: auto;
@@ -422,7 +422,7 @@
 
   .mainStatement {
     display: block;
-    padding: 36px var(--page-gutter) 40px;
+    padding: 46px var(--page-gutter) 56px;
     background: #111;
     color: var(--white);
     font-size: 36px;
@@ -435,7 +435,7 @@
 
   .statementBreak {
     margin-top: 0;
-    padding: 46px var(--page-gutter) 0;
+    padding: 70px var(--page-gutter) 0;
     background: var(--surface-light);
     color: #0a0a0a;
     font-size: 36px;
@@ -445,7 +445,7 @@
   .rightCopy p {
     max-width: none;
     margin: 0;
-    padding: 26px var(--page-gutter) 56px;
+    padding: 32px var(--page-gutter) 76px;
     background: var(--surface-light);
     color: rgba(10, 10, 10, 0.76);
     font-size: 16px;
@@ -460,7 +460,7 @@
 @media (max-width: 370px) {
   .brandTurn,
   .frame {
-    min-height: 1380px;
+    min-height: 1710px;
   }
 
   .leftTitle {

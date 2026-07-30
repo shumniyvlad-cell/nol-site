@@ -82,17 +82,27 @@
 
 .projectorWash::before {
   position: absolute;
-  inset: 0;
+  inset: -4%;
   background:
-    linear-gradient(90deg, #050505 0 78%, transparent 100%) left 23% /
-      34% 12% no-repeat,
-    linear-gradient(90deg, #050505 0 82%, transparent 100%) left 40% /
-      27% 23% no-repeat,
-    linear-gradient(90deg, #050505 0 84%, transparent 100%) left 67% /
-      20% 25% no-repeat,
-    linear-gradient(90deg, #050505 0 86%, transparent 100%) left bottom /
-      20% 18% no-repeat;
+    radial-gradient(
+      ellipse 36% 16% at 15% 27%,
+      #050505 0%,
+      #050505 46%,
+      rgba(5, 5, 5, 0.72) 68%,
+      transparent 82%
+    ),
+    radial-gradient(
+      ellipse 31% 42% at 11% 53%,
+      rgba(5, 5, 5, 0.62),
+      transparent 78%
+    ),
+    radial-gradient(
+      ellipse 24% 22% at 10% 82%,
+      rgba(5, 5, 5, 0.58),
+      transparent 78%
+    );
   content: "";
+  filter: blur(12px);
 }
 
 .format {
@@ -105,6 +115,7 @@
   font-family: var(--font-plex-mono), monospace;
   font-size: 13px;
   letter-spacing: 0.16em;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.78);
 }
 
 .statement {
@@ -133,7 +144,7 @@
   left: var(--page-gutter);
   z-index: 3;
   display: grid;
-  gap: 24px;
+  gap: 30px;
 }
 
 .actions button {
@@ -145,11 +156,12 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(247, 247, 245, 0.82);
+  color: rgba(247, 247, 245, 0.94);
   text-align: left;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.78);
 }
 
 .actionFrame {
@@ -649,7 +661,7 @@
     bottom: 54px;
     left: 20px;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 12px;
   }
 
   .actions button {

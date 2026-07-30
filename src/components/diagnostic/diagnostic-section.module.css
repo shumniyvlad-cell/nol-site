@@ -344,7 +344,7 @@
   .diagnostic,
   .frame,
   .form {
-    min-height: max(860px, 100svh);
+    min-height: max(1010px, 100svh);
   }
 
   .frame {
@@ -362,7 +362,7 @@
   .stepNumber {
     top: 124px;
     left: -8px;
-    font-size: 190px;
+    font-size: 172px;
     letter-spacing: -0.12em;
   }
 
@@ -373,7 +373,7 @@
   }
 
   .form {
-    padding-top: 238px;
+    padding-top: 218px;
   }
 
   .form fieldset {
@@ -382,18 +382,19 @@
 
   .question {
     width: 100%;
+    min-height: 4.12em;
     font-size: clamp(36px, 10.4vw, 42px);
     line-height: 1.03;
   }
 
   .options {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 18px;
   }
 
   .option,
   .option label {
-    min-height: 70px;
+    min-height: 72px;
   }
 
   .option label {
@@ -446,11 +447,11 @@
 
 @media (max-width: 370px) {
   .stepNumber {
-    font-size: 180px;
+    font-size: 164px;
   }
 
   .form {
-    padding-top: 214px;
+    padding-top: 206px;
   }
 
   .question {

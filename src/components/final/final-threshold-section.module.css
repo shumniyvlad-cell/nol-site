@@ -161,7 +161,7 @@
 @media (max-width: 599px) {
   .final,
   .frame {
-    min-height: 900px;
+    min-height: 960px;
     padding-bottom: max(28px, env(safe-area-inset-bottom));
   }
 
@@ -184,7 +184,7 @@
   }
 
   .copy {
-    top: 216px;
+    top: 246px;
     left: 30px;
     width: calc(100% - 50px);
   }
@@ -204,7 +204,7 @@
   .actions {
     width: 100%;
     gap: 8px;
-    margin-top: 48px;
+    margin-top: 68px;
   }
 
   .actions a {
@@ -219,15 +219,19 @@
   }
 
   .actions a:first-child {
-    min-height: 64px;
-    border-top: 1px solid rgba(17, 17, 17, 0.5);
-    border-bottom: 1px solid rgba(17, 17, 17, 0.5);
+    min-height: 68px;
+    border-top: 1px solid rgba(17, 17, 17, 0.3);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.3);
     font-size: 16px;
     font-weight: 650;
   }
 
   .actions a:first-child .actionRule {
-    opacity: 0.8;
+    opacity: 0.46;
+  }
+
+  .actionRule {
+    background: rgba(17, 17, 17, 0.28);
   }
 
   .note {
